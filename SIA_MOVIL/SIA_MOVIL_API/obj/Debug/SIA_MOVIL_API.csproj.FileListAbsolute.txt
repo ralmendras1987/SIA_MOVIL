@@ -1,0 +1,2 @@
+D:\GITLAB\sia_movil\Fuentes\SitioWeb\SIA_MOVIL\SIA_MOVIL_API\obj\Debug\SIA_MOVIL_API.csprojAssemblyReference.cache
+D:\GITLAB\sia_movil\Fuentes\SitioWeb\SIA_MOVIL\SIA_MOVIL_API\obj\Debug\SIA_MOVIL_API.csproj.CoreCompileInputs.cache
