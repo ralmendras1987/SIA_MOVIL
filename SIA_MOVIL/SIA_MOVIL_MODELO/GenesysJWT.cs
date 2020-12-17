@@ -11,20 +11,13 @@ using System.Text;
 using System.Web;
 using SIA_MOVIL_MODELO;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace GenesysJWT
 {
-    public class Usuario {
 
-        public string USER = string.Empty;
-        public string TOKEN = string.Empty;
-        public string KEY = string.Empty;
-        public string STATUS = string.Empty;
-        public string SESSION_ID = string.Empty;
-
-
-    }
-
+ 
+    
 
     public class JWT
     {
@@ -62,7 +55,7 @@ namespace GenesysJWT
         }
 
 
-        public string GeneraToken(Usuario USER)
+        public string GeneraToken(VM_Usuario DATA)
         {
 
             DateTime expiracion = DateTime.UtcNow.AddMinutes(Comun._TIEMPO_EXPIRA_SESION());
@@ -72,10 +65,10 @@ namespace GenesysJWT
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.Name, USER.USER), new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
+                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
                 SigningCredentials = new SigningCredentials(securityKey,
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha512Signature)
             };
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -83,7 +76,7 @@ namespace GenesysJWT
             return handler.WriteToken(token);
         }
 
-        public string GeneraToken(Usuario USER, int minutos)
+        public static string GeneraToken(VM_Usuario DATA, int minutos)
         {
 
             DateTime expiracion = DateTime.UtcNow.AddMinutes(minutos);
@@ -93,10 +86,10 @@ namespace GenesysJWT
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.Name, USER.USER), new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
+                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
                 SigningCredentials = new SigningCredentials(securityKey,
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha512Signature)
             };
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -105,24 +98,19 @@ namespace GenesysJWT
         }
 
 
-        public bool ValidaToken(Usuario USER, int minutos)
+        public static bool ValidaToken(VM_Usuario DATA, int minutos)
         {
 
 
-            if (USER.KEY == Key) {
-                return true;
-            }
-
-            if (USER.TOKEN is null || USER.TOKEN == string.Empty)
+            if (DATA.TOKEN is null || DATA.TOKEN == string.Empty)
             {
+
                 return false;
+
             }
 
 
-
-            string username = null;
-
-            ClaimsPrincipal principal = GetPrincipal(USER.TOKEN);
+            ClaimsPrincipal principal = GetPrincipal(DATA.TOKEN);
             if (principal == null)
                 return false;
             ClaimsIdentity identity = null;
@@ -134,20 +122,21 @@ namespace GenesysJWT
             {
                 return false;
             }
-            Claim usernameClaim = identity.FindFirst(ClaimTypes.Name);
-            username = usernameClaim.Value;
+            Claim userData = identity.FindFirst(ClaimTypes.UserData);
+
+            Claim rolesData = identity.FindFirst(ClaimTypes.Role);
 
 
             Claim expiraClaim = identity.FindFirst(ClaimTypes.Expiration);
             string expira = null;
             expira = expiraClaim.Value;
             DateTime EXPIRACION = DateTime.Parse(expira);
-            //DateTime AHORA = DateTime.UtcNow.AddMinutes(minutos);
             DateTime AHORA = DateTime.UtcNow;
 
 
+            DATA.TOKEN = null;
 
-            if (EXPIRACION > AHORA && username == USER.USER)
+            if (EXPIRACION > AHORA && JsonConvert.DeserializeObject<Usuario>(userData.Value) == DATA.USER && JsonConvert.DeserializeObject<List<Roles>>(rolesData.Value) == DATA.ROLES)
             {
 
                 return true;

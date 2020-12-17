@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using GenesysJWT;
 using Newtonsoft.Json;
  
 
@@ -16,443 +17,176 @@ namespace SIA_MOVIL_MODELO
 {
     public class Metodos
     {
-
-        public static void login(Historico DATA)
-        {
-            string ex = string.Empty;
-            try
-            {
-                DATA.LOGIN.usuario = Comun._USUARIO();
-                DATA.LOGIN.password = Comun._PASS();
-
-                var client = new RestClient(Comun._APIURLLOGIN());
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("application/json", JsonConvert.SerializeObject(DATA.LOGIN), ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-
-                DATA.TOKEN = JsonConvert.DeserializeObject<Token>(response.Content);
-
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
-                    ex = (response.ErrorMessage == null) ? "Error: " + response.StatusCode : response.ErrorMessage;
-                    DATA.ERRORES.Add("login: " + ex.ToString());
-                }
-                else
-                {
-                    if (DATA.TOKEN.status.ToUpper() == "ERROR")
-                    {
-                        DATA.ERRORES.Add("login: " + DATA.TOKEN.value + ": " + ex.ToString());
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                DATA.ERRORES.Add("login: " + ex.ToString() + ": " + e.Message);
-            }
-
-
-        }
-
-        public static void getHistorico(Historico DATA)
+        public static void IniciaSesion(VM_Usuario DATA)
         {
 
-            DATA.resultado.Clear();
 
             try
             {
+                DATA.USER.USER = DATA.USER.USER.ToUpper();
 
-                foreach (Consulta ITEM in DATA.consulta)
-                {
-
-                    var request = WebRequest.Create(new Uri(Comun._APIURLHISTORICO()));
-
-                    request.ContentType = "application/json";
-                    request.Headers.Add("Authorization", "Bearer " + DATA.TOKEN.value);
-                    request.Method = "GET";
-
-                    var type = request.GetType();
-                    var currentMethod = type.GetProperty("CurrentMethod", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(request);
-
-                    var methodType = currentMethod.GetType();
-                    methodType.GetField("ContentBodyNotAllowed", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(currentMethod, false);
-
-                    List<object> consulta = new List<object>();
-
-
-                    consulta.Add(new
-                    {
-                        dispositivoId = ITEM.dispositivoId
-                    });
-
-                    string json = JsonConvert.SerializeObject(new
-                    {
-                        estampaTiempoInicial = ITEM.estampaTiempoInicial,
-                        estampaTiempoFinal = ITEM.estampaTiempoFinal,
-                        tipoMedicion = ITEM.tipoMedicion,
-                        consulta = consulta
-                    });
-
-                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-                    {
-                        streamWriter.Write(json);
-                    }
-
-                    using (Stream s = request.GetResponse().GetResponseStream())
-                    {
-                        using (StreamReader sr = new StreamReader(s))
-                        {
-                            var jsonResponse = sr.ReadToEnd();
-                            Historico R = new Historico();
-                            R = JsonConvert.DeserializeObject<Historico>(jsonResponse);
-
-                            DATA.codigo = R.codigo;
-
-                            if (R.resultado != null)
-                            {
-
-                                foreach (Resultado RES in R.resultado)
-                                {
-
-                                    foreach (Parametros ROW in RES.parametros)
-                                    {
-                                        ROW.estacionid = ITEM.estacionid;
-                                        ROW.plantaid = ITEM.plantaid;
-                                        ROW.estacionActiva = ITEM.estacionActiva;
-
-                                    }
-
-                                    DATA.resultado.Add(RES);
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-
-
-
-
-            }
-            catch (Exception e)
-            {
-                DATA.ERRORES.Add("getHistorico: " + e.Message);
-
-            }
-
-
-        }
-
-        public static void SP_LISTA_ESTACIONES_1H(Historico DATA)
-        {
-
-            try
-            {
-                DATA.consulta = new List<Consulta>();
 
                 DataTable DT = new DataTable();
 
                 OracleConnection CON = new OracleConnection(Comun._STR_CON());
                 OracleCommand CMD = new OracleCommand();
                 CMD.Connection = CON;
-                CMD.CommandText = Comun._PACKAGE() + "SP_LISTA_ESTACIONES_1H";
+                CMD.CommandText = Comun._PACKAGE() + "SP_LOGIN";
                 CMD.CommandType = CommandType.StoredProcedure;
 
-                CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, DATA.filtros.PLANTA.Length).Value = DATA.filtros.PLANTA;
-                CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = DATA.filtros.ESTACION;
-                CMD.Parameters.Add("VD_FECHA_INI", OracleType.DateTime).Value = DATA.filtros.FECHA_INI;
-                CMD.Parameters.Add("VD_FECHA_FIN", OracleType.DateTime).Value = DATA.filtros.FECHA_FIN;
+                CMD.Parameters.Add("PC_USUARIO", OracleType.VarChar, 50).Value = DATA.USER.USER;
+                CMD.Parameters.Add("PC_PASS", OracleType.VarChar, 50).Value = DATA.USER.PASS;
 
-                CMD.Parameters.Add("IO_CURSOR", OracleType.Cursor).Direction = ParameterDirection.Output;
+
+                CMD.Parameters.Add("PC_NOMBRE", OracleType.VarChar, 50).Direction = ParameterDirection.Output;
+                CMD.Parameters.Add("PN_RUT", OracleType.Number).Direction = ParameterDirection.Output;
+                CMD.Parameters.Add("PN_RUT_PROVEEDOR", OracleType.Number).Direction = ParameterDirection.Output;
+                CMD.Parameters.Add("PC_CORREO", OracleType.VarChar, 50).Direction = ParameterDirection.Output;
+
+
+
+                OracleParameter PN_CODIGO_ERROR = new OracleParameter();
+                PN_CODIGO_ERROR.ParameterName = "PN_CODIGO_ERROR";
+                PN_CODIGO_ERROR.Direction = ParameterDirection.Output;
+                PN_CODIGO_ERROR.OracleType = OracleType.Number;
+
+                CMD.Parameters.Add(PN_CODIGO_ERROR);
+
+                OracleParameter PC_DSC_ERROR = new OracleParameter();
+                PC_DSC_ERROR.ParameterName = "PC_DSC_ERROR";
+                PC_DSC_ERROR.Direction = ParameterDirection.Output;
+                PC_DSC_ERROR.OracleType = OracleType.VarChar;
+                PC_DSC_ERROR.Size = 2000;
+
+                CMD.Parameters.Add(PC_DSC_ERROR);
+
 
 
                 OracleDataAdapter DA = new OracleDataAdapter(CMD);
 
-                DA.Fill(DT);
+                CON.Open();
 
-                if (DT.Rows.Count > 0)
+                CMD.ExecuteNonQuery();
+
+
+                if (PC_DSC_ERROR.Value.ToString().Length == 0)
                 {
-                    foreach (DataRow ITEM in DT.Rows)
-                    {
 
-                        try
-                        {
-
-                            DATA.consulta.Add(new Consulta
-                            {
-                                dispositivoId = ITEM["dispositivoId"].ToString(),
-                                plantaid = ITEM["plantaid"].ToString(),
-                                estacionid = ITEM["estacionid"].ToString(),
-                                tipoMedicion = ITEM["tipoMedicion"].ToString(),
-                                estacionActiva = ITEM["estacionActiva"].ToString(),
-                                estampaTiempoInicial = ITEM["estampaTiempoInicial"].ToString(),
-                                estampaTiempoFinal = ITEM["estampaTiempoFinal"].ToString()
-                            });
-
-                        }
-                        catch (Exception EX)
-                        {
-
-                            DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1H: Dato invalido dentro de registro Consulta" + EX.Message);
-
-                        }
+                    DATA.USER.NOMBRE = CMD.Parameters["PC_NOMBRE"].Value.ToString();
+                    //DATA.USER.RUT = CMD.Parameters["PN_RUT"].Value.ToString();
+                    //DATA.USER.RUT_PROVEEDOR = CMD.Parameters["PN_RUT_PROVEEDOR"].Value.ToString();
+                    DATA.USER.CORREO = CMD.Parameters["PC_CORREO"].Value.ToString();
 
 
-                    }
+                    DATA.TOKEN = GenesysJWT.JWT.GeneraToken(DATA, Comun._TIEMPO_EXPIRA_SESION());
 
                 }
                 else
                 {
-                    DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1H: Lista vacia");
+                    DATA.ERROR_ID = 1;
+                    DATA.ERROR_DSC = PC_DSC_ERROR.Value.ToString();
                 }
+
+                CON.Close();
 
             }
             catch (Exception EX)
             {
-
-                DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1H: " + EX.Message);
+                DATA.ERROR_ID = 1;
+                DATA.ERROR_DSC = "Error al iniciar sesion";
+                //DATA.ERROR_EX = "BaseLogin IniciaSesion: " + EX.Message;
 
             }
 
+            DATA.USER.PASS = string.Empty;
+
         }
 
-        public static void SP_LISTA_ESTACIONES_1M(Historico DATA)
+
+        //public static void GeneraMenu(Menu MENU)
+        //{
+        //    try
+        //    {
+
+        //        DataTable DT = new DataTable();
+
+        //        OracleConnection CON = new OracleConnection(Comun._STR_CON());
+        //        OracleCommand CMD = new OracleCommand();
+        //        CMD.Connection = CON;
+        //        CMD.CommandText = Comun._PACKAGE() + "SP_MENU";
+        //        CMD.CommandType = CommandType.StoredProcedure;
+
+        //        CMD.Parameters.Add("PC_USUARIO", OracleType.VarChar, 50).Value = MENU.USER.USER;
+
+
+        //        CMD.Parameters.Add("P_CURSOR", OracleType.Cursor).Direction = ParameterDirection.Output;
+
+        //        OracleDataAdapter DA = new OracleDataAdapter(CMD);
+
+
+
+        //        DA.Fill(DT);
+
+        //        if (DT.Rows.Count > 0)
+        //        {
+        //            foreach (DataRow ITEM in DT.Rows)
+        //            {
+
+        //                MenuBody ROW = new MenuBody();
+
+        //                ROW.ID = ITEM["ID"].ToString();
+        //                ROW.DSC = ITEM["DSC"].ToString();
+        //                ROW.PADREID = ITEM["PADREID"].ToString();
+        //                ROW.ICONO = ITEM["ICONO"].ToString();
+        //                ROW.URL = ITEM["URL"].ToString();
+        //                ROW.NIVEL = ITEM["NIVEL"].ToString();
+
+
+        //                MENU.MENU.Add(ROW);
+
+        //            }
+
+        //        }
+
+
+
+        //    }
+        //    catch (Exception EX)
+        //    {
+
+        //        MENU.ERROR_ID = 1;
+        //        MENU.ERROR_DSC = "Error al generar menu";
+        //        MENU.ERROR_EX = "BaseLogin GeneraMenu: " + EX.Message;
+
+        //    }
+
+
+        //}
+
+        public static bool ValidaCaptcha(string token)
         {
-
-            try
+            if (Comun._TESTING())
             {
-                DATA.consulta = new List<Consulta>();
-
-                DataTable DT = new DataTable();
-
-                OracleConnection CON = new OracleConnection(Comun._STR_CON());
-                OracleCommand CMD = new OracleCommand();
-                CMD.Connection = CON;
-                CMD.CommandText = Comun._PACKAGE() + "SP_LISTA_ESTACIONES_1M";
-                CMD.CommandType = CommandType.StoredProcedure;
-
-                CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, DATA.filtros.PLANTA.Length).Value = DATA.filtros.PLANTA;
-                CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = DATA.filtros.ESTACION;
-                CMD.Parameters.Add("VD_FECHA_INI", OracleType.DateTime).Value = DATA.filtros.FECHA_INI;
-                CMD.Parameters.Add("VD_FECHA_FIN", OracleType.DateTime).Value = DATA.filtros.FECHA_FIN;
-
-                CMD.Parameters.Add("IO_CURSOR", OracleType.Cursor).Direction = ParameterDirection.Output;
-
-
-                OracleDataAdapter DA = new OracleDataAdapter(CMD);
-
-                DA.Fill(DT);
-
-                if (DT.Rows.Count > 0)
-                {
-                    foreach (DataRow ITEM in DT.Rows)
-                    {
-
-                        try
-                        {
-
-                            DATA.consulta.Add(new Consulta
-                            {
-                                dispositivoId = ITEM["dispositivoId"].ToString(),
-                                plantaid = ITEM["plantaid"].ToString(),
-                                estacionid = ITEM["estacionid"].ToString(),
-                                tipoMedicion = ITEM["tipoMedicion"].ToString(),
-                                estacionActiva = ITEM["estacionActiva"].ToString(),
-                                estampaTiempoInicial = ITEM["estampaTiempoInicial"].ToString(),
-                                estampaTiempoFinal = ITEM["estampaTiempoFinal"].ToString()
-                            });
-
-                        }
-                        catch (Exception EX)
-                        {
-
-                            DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1M: Dato invalido dentro de registro Consulta" + EX.Message);
-
-                        }
-
-
-                    }
-
-                }
-                else
-                {
-                    DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1M: Lista vacia");
-                }
-
-            }
-            catch (Exception EX)
-            {
-
-                DATA.ERRORES.Add("SP_LISTA_ESTACIONES_1M: " + EX.Message);
-
+                return true;
             }
 
+            return true;
+
+            //var client = new RestClient("https://www.google.com/recaptcha/api/siteverify?secret=6LdNfqwZAAAAAMqskSRbeiS3maaulxctCtmJZx1W&response=" + token);
+            //client.Timeout = -1;
+            //var request = new RestRequest(Method.POST);
+            //IRestResponse response = client.Execute(request);
+            //Console.WriteLine(response.Content);
+
+            //dynamic obj = JsonConvert.DeserializeObject<dynamic>(response.Content);
+
+
+            //return obj.success;
 
         }
 
 
-        public static void CARGA_VALORES_API_1M(Historico DATA)
-        {
-            OracleConnection CON = new OracleConnection(Comun._STR_CON());
-            try
-            {
-
-                DataTable DT = new DataTable();
-                OracleCommand CMD = new OracleCommand();
-                CON.Open();
-                foreach (Resultado ITEM in DATA.resultado)
-                {
-
-                    foreach (Parametros ROW in ITEM.parametros)
-                    {
-                        try
-                        {
-                            DT = new DataTable();
-                            CMD = new OracleCommand();
-
-                            CMD.Connection = CON;
-                            CMD.CommandText = Comun._PACKAGE() + "CARGA_VALORES_API_1M";
-                            CMD.CommandType = CommandType.StoredProcedure;
-
-                            CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, ROW.plantaid.Length).Value = ROW.plantaid;
-                            CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = ROW.estacionid;
-                            CMD.Parameters.Add("VV_ESTACION_ACTIVA", OracleType.VarChar, ROW.estacionActiva.Length).Value = ROW.estacionActiva;
-                            CMD.Parameters.Add("VV_NOMBRE", OracleType.VarChar, ROW.nombre.Length).Value = ROW.nombre;
-                            CMD.Parameters.Add("VN_VALOR", OracleType.Number).Value = ROW.valor.Replace(".", ",");
-                            CMD.Parameters.Add("VV_UNIDAD", OracleType.VarChar, ROW.unidad.Length).Value = ROW.unidad;
-                            CMD.Parameters.Add("VV_ESTAMPATIEMPO", OracleType.VarChar, ROW.estampaTiempo.Length).Value = ROW.estampaTiempo;
-                            CMD.Parameters.Add("VV_ESTADO", OracleType.VarChar, 500).Value = (ROW.estado == null) ? "" : ROW.estado;
-
-                            CMD.ExecuteNonQuery();
-                        }
-                        catch (Exception EX)
-                        {
-                            DATA.ERRORES.Add("CARGA_VALORES_API_1M:" + ROW.plantaid + " - " + ROW.estacionid + " - " + ROW.nombre + " - " + ROW.estampaTiempo + " - " + ROW.valor.Replace(".", ",") + " - " + EX.Message);
-
-                        }
-
-                    }
-
-                }
-                CON.Close();
-                CON.Dispose();
-
-            }
-            catch (Exception EX)
-            {
-                CON.Close();
-                CON.Dispose();
-                DATA.ERRORES.Add("CARGA_VALORES_API_1M:" + EX.Message);
-
-            }
-            CON.Close();
-            CON.Dispose();
-        }
-
-        public static void CARGA_VALORES_API_1H(Historico DATA)
-        {
-            OracleConnection CON = new OracleConnection(Comun._STR_CON());
-            try
-            {
-
-                DataTable DT = new DataTable();
-                OracleCommand CMD = new OracleCommand();
-
-                CON.Open();
-
-                foreach (Resultado ITEM in DATA.resultado)
-                {
-
-                    foreach (Parametros ROW in ITEM.parametros)
-                    {
-                        try
-                        {
-                            DT = new DataTable();
-                            CMD = new OracleCommand();
-
-                            CMD.Connection = CON;
-                            CMD.CommandText = Comun._PACKAGE() + "CARGA_VALORES_API_1H";
-                            CMD.CommandType = CommandType.StoredProcedure;
-
-                            CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, ROW.plantaid.Length).Value = ROW.plantaid;
-                            CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = ROW.estacionid;
-                            CMD.Parameters.Add("VV_ESTACION_ACTIVA", OracleType.VarChar, ROW.estacionActiva.Length).Value = ROW.estacionActiva;
-                            CMD.Parameters.Add("VV_NOMBRE", OracleType.VarChar, ROW.nombre.Length).Value = ROW.nombre;
-                            CMD.Parameters.Add("VN_VALOR", OracleType.Number).Value = ROW.valor.Replace(".", ",");
-                            CMD.Parameters.Add("VV_UNIDAD", OracleType.VarChar, ROW.unidad.Length).Value = ROW.unidad;
-                            CMD.Parameters.Add("VV_ESTAMPATIEMPO", OracleType.VarChar, ROW.estampaTiempo.Length).Value = ROW.estampaTiempo;
-                            CMD.Parameters.Add("VV_ESTADO", OracleType.VarChar, 500).Value = (ROW.estado == null) ? "" : ROW.estado;
-
-                            CMD.ExecuteNonQuery();
-                        }
-                        catch (Exception EX)
-                        {
-                            DATA.ERRORES.Add("CARGA_VALORES_API_1H:" + ROW.plantaid + " - " + ROW.estacionid + " - " + ROW.nombre + " - " + ROW.estampaTiempo + " - " + ROW.valor.Replace(".", ",") + " - " + EX.Message);
-
-                        }
-
-                    }
-
-                }
-
-                CON.Close();
-            }
-            catch (Exception EX)
-            {
-                CON.Close();
-                CON.Dispose();
-                DATA.ERRORES.Add("CARGA_VALORES_API_1H:" + EX.Message);
-
-            }
-
-            CON.Close();
-            CON.Dispose();
-        }
-
-
-        public static void CARGA_LOG_ERROR(List<string> DATA, string TITULO, string PARAMETROS)
-        {
-            OracleConnection CON = new OracleConnection(Comun._STR_CON());
-
-            foreach (string ITEM in DATA)
-            {
-                try
-                {
-                    DataTable DT = new DataTable();
-                    OracleCommand CMD = new OracleCommand();
-
-                    DT = new DataTable();
-                    CMD = new OracleCommand();
-
-                    CMD.Connection = CON;
-                    CMD.CommandText = Comun._PACKAGE() + "CARGA_LOG_ERROR";
-                    CMD.CommandType = CommandType.StoredProcedure;
-
-                    CMD.Parameters.Add("VV_NOMBRE_PROCESO", OracleType.VarChar, TITULO.Length).Value = TITULO;
-                    CMD.Parameters.Add("VN_NUMERO_ERROR", OracleType.VarChar, 100).Value = DBNull.Value;
-                    CMD.Parameters.Add("VV_DESC_ERROR", OracleType.VarChar, ITEM.Length).Value = ITEM;
-                    CMD.Parameters.Add("VV_PARAMETROS", OracleType.VarChar, PARAMETROS.Length).Value = PARAMETROS;
-                    CON.Open();
-                    CMD.ExecuteNonQuery();
-                    CON.Close();
-                }
-                catch (Exception EX)
-                {
-
-                    CON.Close();
-
-                }
-                CON.Close();
-
-            }
-
-
-        }
-
+      
     }
-
 
 }
