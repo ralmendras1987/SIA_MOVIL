@@ -17,11 +17,26 @@ namespace SIA_MOVIL
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/js/Global.js",
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/toastr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/toastr.css"));
+
+
+
+
+
+
+
+            bundles.Add(new ScriptBundle("~/bundles/Login").Include(
+                     "~/js/Login/Login.js",
+                     "~/js/Login/LoginService.js"));
+
+            bundles.Add(new StyleBundle("~/Content/Login").Include(
+                      "~/Content/Login.css"));
         }
     }
 }

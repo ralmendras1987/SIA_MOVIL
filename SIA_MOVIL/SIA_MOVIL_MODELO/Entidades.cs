@@ -17,8 +17,6 @@ namespace SIA_MOVIL_MODELO
         public string CORREO = string.Empty;
         public string TELEFONO = string.Empty;
 
-        //public string TOKEN = string.Empty;
-        //public string KEY = string.Empty;
         public string ROL = string.Empty;
         public string SESSION_ID = string.Empty;
 
@@ -49,12 +47,7 @@ namespace SIA_MOVIL_MODELO
 
     }
 
-    //public class Login
-    //{
-    //    public string usuario = "cmpc";
-    //    public string password = "20.cmpc.!";
 
-    //}
     public class Token
     {
         public string status = string.Empty;
@@ -62,15 +55,6 @@ namespace SIA_MOVIL_MODELO
 
     }
 
-    //public class VM_Login
-    //{
-
-    //    public GenesysJWT.Usuario USER = new GenesysJWT.Usuario();
-    //    public Filtros FILTROS = new Filtros();
-
-    //    public string ERROR_DSC = string.Empty;
-
-    //}
 
 
      
