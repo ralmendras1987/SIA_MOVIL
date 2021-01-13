@@ -1,5 +1,5 @@
 ﻿let Global = {
-    UrlBack: '/PortalProveedoresAPI/api/'
+    UrlBack: '/SIA_MOVIL/'
 };
 
 let Route = {
@@ -95,3 +95,11 @@ $(document).ajaxStop(function () {
 $(document).ajaxStart(function () {
     $(".modal_load").show();
 });
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "280px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}

@@ -39,7 +39,7 @@ namespace SIA_MOVIL_MODELO
         public string TOKEN = string.Empty;
         public string KEY = string.Empty;
 
-        public Usuario USER = new Usuario();
+        public Usuario USER_DATA = new Usuario();
         public List<Roles> ROLES = new List<Roles>();
 
         public int ERROR_ID = 0;

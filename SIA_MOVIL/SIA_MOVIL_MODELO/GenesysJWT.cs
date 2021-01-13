@@ -55,7 +55,7 @@ namespace GenesysJWT
         }
 
 
-        public string GeneraToken(VM_Usuario DATA)
+        public static string GeneraToken(VM_Usuario DATA)
         {
 
             DateTime expiracion = DateTime.UtcNow.AddMinutes(Comun._TIEMPO_EXPIRA_SESION());
@@ -65,7 +65,7 @@ namespace GenesysJWT
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
+                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER_DATA)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha512Signature)
@@ -86,7 +86,7 @@ namespace GenesysJWT
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
+                      new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER_DATA)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
                 SigningCredentials = new SigningCredentials(securityKey,
                 SecurityAlgorithms.HmacSha512Signature)
@@ -136,7 +136,7 @@ namespace GenesysJWT
 
             DATA.TOKEN = null;
 
-            if (EXPIRACION > AHORA && JsonConvert.DeserializeObject<Usuario>(userData.Value) == DATA.USER && JsonConvert.DeserializeObject<List<Roles>>(rolesData.Value) == DATA.ROLES)
+            if (EXPIRACION > AHORA && JsonConvert.DeserializeObject<Usuario>(userData.Value) == DATA.USER_DATA && JsonConvert.DeserializeObject<List<Roles>>(rolesData.Value) == DATA.ROLES)
             {
 
                 return true;

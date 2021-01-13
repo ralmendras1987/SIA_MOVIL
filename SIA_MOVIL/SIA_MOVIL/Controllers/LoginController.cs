@@ -51,7 +51,7 @@ namespace SIA_MOVIL_API.Controllers
 
                     return new JsonHttpStatusResult(new SIA_MOVIL_MODELO.Usuario { ERROR_ID = 1, ERROR_DSC = "Usuario no existe, valide datos" }, HttpStatusCode.BadRequest);
                 }
-                SESSION.USER.PASS = "";
+                SESSION.USER_DATA.PASS = "";
 
                 Session["UserSession"] = SESSION;
                 Session["TokenSession"] = SESSION.TOKEN;

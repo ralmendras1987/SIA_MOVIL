@@ -7,7 +7,7 @@ namespace SIA_MOVIL.Models
 
         
         //public const string URL = "http://localhost:9100/PortalProveedoresAPI/api/";
-        public const string URL = "http://cmpc-ds119.cmpc.cl:9100/PortalProveedoresApi/api/";
+        public const string URL = "http://localhost:9770/SIA_MOVIL_API/api/";
         //public const string URL = "https://compramaderas.cmpc.cl/PortalProveedoresAPI/api/";
 
 

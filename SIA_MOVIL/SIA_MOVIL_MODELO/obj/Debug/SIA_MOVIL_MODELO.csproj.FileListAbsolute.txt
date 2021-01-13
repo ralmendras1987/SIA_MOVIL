@@ -20,8 +20,8 @@ C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.Ide
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.xml
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.xml
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.xml
-C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csprojAssemblyReference.cache
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CoreCompileInputs.cache
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll
 C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.pdb
+C:\GENESYS\Sitios\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csprojAssemblyReference.cache

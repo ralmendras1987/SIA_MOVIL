@@ -31,7 +31,7 @@
                     <input type="checkbox" class="form-check-input">
                     <label class="form-check-label">Recordarme</label>
                 </div>
-                <button type="submit" class="btn btn-verde btn-block">Ingresar</button>
+                <button type="button" id="BtnLogin" class="btn btn-verde btn-block">Ingresar</button>
                 <a href="#" style="text-decoration: none;"><p class="text-center text-dark mt-3" style="text-decoration: underline;">Olvidé mi contraseña</p></a>
             </form>
         </div>
@@ -39,8 +39,11 @@
     </div>
 </div>
 
+$
 
+@section Scripts{
+    @Scripts.Render("~/bundles/Login?r=" + DateTime.Now.ToString("ddmmyymiss"))
+}
 
-@Scripts.Render("~/bundles/Login?r=" + DateTime.Now.ToString("ddmmyymiss"))
 
 

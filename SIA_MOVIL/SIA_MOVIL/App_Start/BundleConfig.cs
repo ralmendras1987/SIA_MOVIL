@@ -22,6 +22,7 @@ namespace SIA_MOVIL
                       "~/Scripts/toastr.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/Site.css",
                       "~/Content/bootstrap.css",
                       "~/Content/toastr.css"));
 
@@ -32,11 +33,18 @@ namespace SIA_MOVIL
 
 
             bundles.Add(new ScriptBundle("~/bundles/Login").Include(
-                     "~/js/Login/Login.js",
-                     "~/js/Login/LoginService.js"));
+                     "~/js/Login/LoginService.js","~/js/Login/Login.js"
+                     ));
 
             bundles.Add(new StyleBundle("~/Content/Login").Include(
                       "~/Content/Login.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Indicadores").Include(
+                     "~/js/Indicadores/IndicadoresService.js", "~/js/Indicadores/Indicadores.js"
+                     ));
+
+            bundles.Add(new StyleBundle("~/Content/Indicadores").Include(
+                      "~/Content/Indicadores.css"));
         }
     }
 }

@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+@Styles.Render("~/Content/Indicadores?r=" + DateTime.Now.ToString("ddmmyymiss"))
+
+
+<!-- Contenido -->
+<div class="content p-3">
+    <p class="text-left col-12 mx-auto mb-5">Praesent at justo dignissim, aliquam purus et, porta metus. Phasellus ac elit efficitur, euismod lacus quis</p>
+
+    <!-- Tabla -->
+    <h6 class="ml-3">Mes: Noviembre | Año: 2020</h6>
+    <section>
+        <table class="table table-bordered shadow-sm">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center pb-4" style="width: 10%; background: #016E3F;color: white;" rowspan="2"><span class="pt-2"></span>Planta</th>
+                    <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Reclamos</th>
+                    <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Incidentes</th>
+                    <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Fiscalizaciones</th>
+                </tr>
+
+                <tr>
+                    <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                    <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                    <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                    <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                    <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                    <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- Pulp -->
+                <tr>
+                    <td class="bg-planta"><strong><span id="plantaPulp">Pulp</span></strong></td>
+                    <td class="text-center bg-planta"><span id="reclamPulpmes">1</span></td>
+                    <td class="text-center bg-planta"><span id="reclamPulpaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">78</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="incidPulpmes">2</span></td>
+                    <td class="text-center bg-planta"><span id="incidPulpaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">10</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="fiscPulpmes">1</span></td>
+                    <td class="text-center bg-planta"><span id="fiscPulpaño"><strong><a style="color: inherit; text-decoration: inherit;" href="detalle-pulp-fiscalizacion.html">6</a></strong></span></td>
+
+                </tr>
+                <!-- Santa Fe -->
+                <tr>
+                    <td class=""><span id="plantaPulp">Santa Fe</span></td>
+                    <td class="text-center"><span id="reclamSantafemes">29</span></td>
+                    <td class="text-center bg-año"><span id="reclamSantafeaño">29</span></td>
+                    <td class="text-center"><span id="incidSantafemes">5</span></td>
+                    <td class="text-center bg-año"><span id="incidSantafeaño">5</span></td>
+                    <td class="text-center"><span id="fiscSantafepmes">2</span></td>
+                    <td class="text-center bg-año"><span id="fiscSantafeaño">2</span></td>
+                </tr>
+
+                <!-- Pacífico -->
+                <tr>
+                    <td class=""><span id="plantaPulp">Pacífico</span></td>
+                    <td class="text-center"><span id="reclamPacificomes">1</span></td>
+                    <td class="text-center bg-año"><span id="reclamPacificoaño">1</span></td>
+                    <td class="text-center"><span id="incidPacificomes">1</span></td>
+                    <td class="text-center bg-año"><span id="incidPacificopaño">1</span></td>
+                    <td class="text-center"><span id="fiscPacificomes">2</span></td>
+                    <td class="text-center bg-año"><span id="fiscPacificoaño">2</span></td>
+                </tr>
+
+                <!-- Laja -->
+                <tr>
+                    <td class=""><span id="plantaPulp">Laja</span></td>
+                    <td class="text-center"><span id="reclamLajames">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamLajaaño">0</span></td>
+                    <td class="text-center"><span id="incidLajames">0</span></td>
+                    <td class="text-center bg-año"><span id="incidLajapaño">0</span></td>
+                    <td class="text-center"><span id="fiscLajames">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscLajaaño">0</span></td>
+                </tr>
+
+                <!-- Guaiba -->
+                <tr>
+                    <td class=""><span id="plantaPulp">Guaiba</span></td>
+                    <td class="text-center"><span id="reclamGuaibames">48</span></td>
+                    <td class="text-center bg-año"><span id="reclamGuaibaaño">48</span></td>
+                    <td class="text-center"><span id="incidGuaibames">4</span></td>
+                    <td class="text-center bg-año"><span id="incidGuaibaaño">4</span></td>
+                    <td class="text-center"><span id="fiscGuaibames">2</span></td>
+                    <td class="text-center bg-año"><span id="fiscGuaibaaño">2</span></td>
+                </tr>
+
+                <!-- Planta Maderas -->
+                <tr>
+                    <td class="bg-planta"><strong><span id="plantaMaderas">Maderas</span></strong></td>
+                    <td class="text-center bg-planta"><span id="reclamMaderasmes">0</span></td>
+                    <td class="text-center bg-planta"><span id="reclamMaderasaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">0</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="incidMaderasmes">1</span></td>
+                    <td class="text-center bg-planta"><span id="incidMaderasaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">1</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="fiscMaderasmes">0</span></td>
+                    <td class="text-center bg-planta"><span id="fiscMaderasaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">0</a></strong></span></td>
+                </tr>
+
+                <!-- Plywood -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Plywood</span></td>
+                    <td class="text-center"><span id="reclamPlywoodmes">48</span></td>
+                    <td class="text-center bg-año"><span id="reclamPlywoodaño">48</span></td>
+                    <td class="text-center"><span id="incidPlywoodmes">4</span></td>
+                    <td class="text-center bg-año"><span id="incidPlywoodaño">4</span></td>
+                    <td class="text-center"><span id="fiscPlywoodmes">2</span></td>
+                    <td class="text-center bg-año"><span id="fiscPlywoodaño">2</span></td>
+                </tr>
+
+                <!-- Rema Coronel -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Rema Coronel</span></td>
+                    <td class="text-center"><span id="reclamRemames">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamRemaaño">0</span></td>
+                    <td class="text-center"><span id="incidRemames">0</span></td>
+                    <td class="text-center bg-año"><span id="incidRemaaño">0</span></td>
+                    <td class="text-center"><span id="fiscRemames">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscRemaaño">0</span></td>
+                </tr>
+
+                <!-- Rema los Ángeles -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Rema los Ángeles</span></td>
+                    <td class="text-center"><span id="reclamAngelesmes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamAngelesaño">0</span></td>
+                    <td class="text-center"><span id="incidAngelesmes">0</span></td>
+                    <td class="text-center bg-año"><span id="incidAngelesaño">0</span></td>
+                    <td class="text-center"><span id="fiscAngelesmes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscAngelesaño">0</span></td>
+                </tr>
+
+                <!-- Aserradero Bucalemu -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Aserradero Bucalemu</span></td>
+                    <td class="text-center"><span id="reclamBucalemumes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamBucalemuaño">0</span></td>
+                    <td class="text-center"><span id="incidBucalemumes">0</span></td>
+                    <td class="text-center bg-año"><span id="incidBucalemuaño">0</span></td>
+                    <td class="text-center"><span id="fiscBucalemumes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscBucalemuaño">0</span></td>
+                </tr>
+
+                <!-- Aserradero Mulchen -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Aserradero Mulchen</span></td>
+                    <td class="text-center"><span id="reclamMulchenmes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamMulchenaño">0</span></td>
+                    <td class="text-center"><span id="incidMulchenmes">0</span></td>
+                    <td class="text-center bg-año"><span id="incidMulchenaño">0</span></td>
+                    <td class="text-center"><span id="fiscMulchenmes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscMulchenaño">0</span></td>
+                </tr>
+
+                <!-- Aserradero Nacimiento -->
+                <tr>
+                    <td class=""><span id="plantaMaderas">Aserradero Nacimiento</span></td>
+                    <td class="text-center"><span id="reclamNacimientomes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamNacimientoaño">0</span></td>
+                    <td class="text-center"><span id="incidNacimientomes">1</span></td>
+                    <td class="text-center bg-año"><span id="incidNacimientoaño">1</span></td>
+                    <td class="text-center"><span id="fiscNacimientomes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscNacimientoaño">0</span></td>
+                </tr>
+
+                <!-- Planta Forestal -->
+                <tr>
+                    <td class="bg-planta"><strong><span id="plantaForestal">Forestal</span></strong></td>
+                    <td class="text-center bg-planta"><span id="reclamForestalmes">0</span></td>
+                    <td class="text-center bg-planta"><span id="reclamForestalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">0</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="incidForestalmes">1</span></td>
+                    <td class="text-center bg-planta"><span id="incidForestalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">1</a></strong></span></td>
+                    <td class="text-center bg-planta"><span id="fiscForestalmes">0</span></td>
+                    <td class="text-center bg-planta"><span id="fiscForestalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">0</a></strong></span></td>
+                </tr>
+
+                <!-- Bosques del Plata -->
+                <tr>
+                    <td class=""><span id="plantaForestal">Bosques del Plata</span></td>
+                    <td class="text-center"><span id="reclamBosquesmes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamBosquesaño">0</span></td>
+                    <td class="text-center"><span id="incidBosquesmes">1</span></td>
+                    <td class="text-center bg-año"><span id="incidBosquesaño">1</span></td>
+                    <td class="text-center"><span id="fiscBosquesmes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscBosquesaño">0</span></td>
+                </tr>
+
+                <!-- Forestal Chile -->
+                <tr>
+                    <td class=""><span id="plantaForestal">Forestal Chile</span></td>
+                    <td class="text-center"><span id="reclamForestalchilemes">0</span></td>
+                    <td class="text-center bg-año"><span id="reclamForestalchileaño">0</span></td>
+                    <td class="text-center"><span id="incidForestalchilemes">1</span></td>
+                    <td class="text-center bg-año"><span id="incidForestalchileaño">1</span></td>
+                    <td class="text-center"><span id="fiscForestalchilemes">0</span></td>
+                    <td class="text-center bg-año"><span id="fiscForestalchileaño">0</span></td>
+                </tr>
+
+                <!-- Total -->
+                <tr>
+                    <td class="bg-total"><span id="total">Total</span></td>
+                    <td class="text-center bg-total"><span id="reclamTotalmes">78</span></td>
+                    <td class="text-center bg-total"><span id="reclamTotalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">78</a></strong></span></td>
+                    <td class="text-center bg-total"><span id="incidTotalmes">22</span></td>
+                    <td class="text-center bg-total"><span id="incidTotalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">22</a></strong></span></td>
+                    <td class="text-center bg-total"><span id="fiscTotalmes">6</span></td>
+                    <td class="text-center bg-total"><span id="fiscTotalaño"><strong><a href="#" style="color: inherit; text-decoration: inherit;">6</a></strong></span></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Tabla fin -->
+</div>
+<!-- Fin contenido -->
+
+@section Scripts{
+    @Scripts.Render("~/bundles/Indicadores?r=" + DateTime.Now.ToString("ddmmyymiss"))
+}

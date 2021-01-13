@@ -26,7 +26,7 @@ namespace SIA_MOVIL_API.Controllers
 
 
 
-            //login.IniciaSesion(USER);
+            SIA_MOVIL_MODELO.Metodos.IniciaSesion(SESSION);
 
 
             if (SESSION.ERROR_ID == 0)
