@@ -60,6 +60,7 @@
     <Compile Include="Comun.cs" />
     <Compile Include="Entidades.cs" />
     <Compile Include="GenesysJWT.cs" />
+    <Compile Include="Indicadores.cs" />
     <Compile Include="Metodos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

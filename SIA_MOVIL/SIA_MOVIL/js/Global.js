@@ -103,3 +103,45 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
+
+function HandleError(ErrorCod, MsjError) {
+
+    if (ErrorCod == 401) {
+        swal({
+            title: "Su sesión ha expirado",
+            text: "Sera redireccionado a la pagina de inicio de sesión",
+            icon: "info"
+        })
+            .then(function () {
+                location.href = Route.Login;
+            });
+
+    }
+    else if (ErrorCod == 403) {
+
+        swal({
+            title: "Su sesión ha expirado",
+            text: MsjError,
+            icon: "info"
+        })
+            .then(function () {
+                location.href = Route.Login;
+            });
+
+    }
+    else if (ErrorCod == 404) {
+
+        toastr.error("Error de comunicación");
+
+    }
+    else if (ErrorCod == 500) {
+
+        toastr.error(MsjError);
+
+    }
+    else {
+
+        toastr.error(MsjError);
+
+    }
+}

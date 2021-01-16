@@ -52,16 +52,11 @@
         <a href="login.html" class="mt-5" style="color: white; font-size: 1.5em;"><img src="~/img/logout.png" class="mr-2" style="vertical-align: text-bottom;" width="25" height="auto" alt="">Cerrar sesión</a>
     </div>
 
-    <div class="col-12" style="background-color: #016E3F; height: 50px;">
-        <div class="row">
-            <a href="home.html"><div class="col-1 mt-3"><i class="fas fa-chevron-left text-white"></i></div></a>
-            <div class="col-10 mt-2 text-center"><h4 class="text-white">Indicadores Ambientales</h4></div>
-        </div>
-    </div>
+    @RenderBody()
 
-    <div class="container">
-        @RenderBody()
-    </div>
+
+
+
 
     @Scripts.Render("~/bundles/jquery?r=" + DateTime.Now.ToString("ddmmyymiss"))
     @Scripts.Render("~/bundles/bootstrap?r=" + DateTime.Now.ToString("ddmmyymiss"))

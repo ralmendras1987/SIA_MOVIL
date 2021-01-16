@@ -24,7 +24,26 @@ namespace SIA_MOVIL_MODELO
 
     public class Comun
     {
+        public static object VALIDA_NULO(object ENTRADA)
+        {
 
+
+            if (ENTRADA == null || ENTRADA.ToString() == "null" || ENTRADA.ToString() == string.Empty)
+            {
+
+                return DBNull.Value;
+
+            }
+            else
+            {
+
+                return ENTRADA.ToString().ToUpper();
+
+            }
+
+
+
+        }
 
         public static string ESCRIBE_CONFIG(string ENTRADA)
         {
