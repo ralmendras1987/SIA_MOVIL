@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+@Styles.Render("~/Content/Indicadores?r=" + DateTime.Now.ToString("ddmmyymiss"))
+
+
+<div class="col-12" style="background-color: #016E3F; height: 50px;">
+    <div class="row">
+        <a id="btnIndicadores" href="@Url.Action("Index", "Home")"><div class="col-1 mt-3"><i class="fas fa-chevron-left text-white"></i></div></a>
+        <div class="col-10 mt-2 text-center"><h4 class="text-white">Indicadores Ambientales</h4></div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <!-- Contenido -->
+    <div id="DivGrilla" class="content p-3 d-none">
+        <p class="text-left col-12 mx-auto mb-5">Praesent at justo dignissim, aliquam purus et, porta metus. Phasellus ac elit efficitur, euismod lacus quis</p>
+
+        <!-- Tabla -->
+        <h6 class="ml-3">Mes: Noviembre | Año: 2020</h6>
+        <section>
+            <table class="table table-bordered shadow-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center pb-4" style="width: 10%; background: #016E3F;color: white;" rowspan="2"><span class="pt-2"></span>Planta</th>
+                        <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Reclamos</th>
+                        <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Incidentes</th>
+                        <th class="text-center" scope="col" style="background: #016E3F;color: white;" colspan="2">Fiscalizaciones</th>
+                    </tr>
+
+                    <tr>
+                        <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                        <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                        <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                        <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                        <th class="text-center" style="background: #016E3F;color: white;">Mes</th>
+                        <th class="text-center" style="background: #016E3F;color: white;">Año</th>
+                    </tr>
+                </thead>
+
+                <tbody id="BodyGrilla">
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Tabla fin -->
+    </div>
+    <!-- Fin contenido -->
+
+
+    <div id="DivDetalle" class="content p-3">
+        <div>
+            <h5 class="titulos ml-2 mb-4 mt-2">Detalle Pulp - Fiscalizaciones</h5>
+
+        </div>
+        <div id="BodyDetalle">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/Indicadores?r=" + DateTime.Now.ToString("ddmmyymiss"))
+}

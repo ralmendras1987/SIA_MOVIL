@@ -1,0 +1,116 @@
+﻿@Styles.Render("~/css/estacion")
+
+<div class="col-12" style="background-color: #016E3F; height: 50px;">
+    <div class="row">
+        <a href="@Url.Action("Index", "Home")"><div class="col-1 mt-3"><i class="fas fa-chevron-left text-white"></i></div></a>
+        <div class="col-10 mt-2 text-center"><h4 id="lbNombreEstacion" class="text-white"></h4></div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Contenido -->
+    <section>
+        <div class="content p-3">
+            <h5 class="titulos ml-2 mb-4 mt-2">Comportamientos Variables</h5>
+
+            <form class="mb-4">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Fecha Consulta</label>
+                        <input id="txtFecha" type="text" class="form-control datepicker">
+                    </div>
+                    <div class="col-6">
+                        <label>Rango de Horas</label>
+                        <input id="txtRango" type="text" class="form-control">
+                    </div>
+                </div>
+            </form>
+
+            <!-- Tarjeta con gráfico -->
+            <div class="card">
+                <div class="card-body">
+                    <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="1148" height="484" style="display: block; width: 574px; height: 242px;"></canvas>
+                    <!-- Variable -->
+                    <p><strong>TRS: </strong><span id="lbTRS" style="color: #FF7700; font-weight: 700;"></span></p>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-4">
+                <button id="btnMeteorologia" class="btn btn-met col-5 mx-auto btn-block" type="button">Meteorología</button>
+                <button id="btnGases" class="btn btn-gas col-5 mx-auto btn-block m-0" type="button">Gases</button>
+            </div>
+
+            <div id="dvMeteorologia" class="card mb-4 pl-3 pr-3" style="display:none;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #003E7B;">Datos Metereológicos</h5>
+                    <p><span id="lbFechaMeteorologia"></span></p>
+
+                    <div id="dvDetalleMeteorologia"></div>
+
+                </div>
+            </div>
+
+            <div  id="dvGases" class="card mb-4 pl-3 pr-3" style="display:none;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #448F00;">Datos Gases</h5>
+                    <p><span id="lbFechaGases"></span></p>
+
+                    <div id="dvDetalleGases"></div>
+
+                </div>
+            </div>
+
+            <!-- Modal detalle -->
+            <div class="modal fade" id="modalTrs" tabindex="-1" role="dialog" aria-labelledby="modalTrs" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom-0">
+                            <h5 class="titulos mb-4 mt-2 ml-4">Detalle últimas horas</h5>
+                        </div>
+                        <div class="modal-body">
+
+                            <table id="table-list" class="table table-hover" style="max-height: 800px;">
+                                <thead id="table-list-head">
+                                    <tr><th></th></tr>
+                                </thead>
+                                <tbody id="table-list-body">
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <p class="text-left ml-4" style="font-size:.8em;">*NV No Válido - Calibración</p>
+                        <div class="modal-footer border-top-0">
+                            <button type="button" class="btn btn-verde text-white btn-block" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section>
+        <h5 class="titulos mb-4 mt-2 ml-4">Ubicación</h5>
+        <div class="slideshow-container">
+
+            <div id="dvLaja" class="mySlides" style="display: none;">
+                <div class="text text-center h5"><strong>Laja</strong></div>
+                <img src="~/Content/img/laja.png" class="mx-auto d-block img-fluid p-5 mb-5">
+            </div>
+
+            <div id="dvSantaFe" class="mySlides" style="display: none;">
+                <div class="text text-center h5"><strong>Santa Fé</strong></div>
+                <img src="~/Content/img/SantaFe.png" class="mx-auto d-block img-fluid p-5 mb-5">
+            </div>
+
+            <div id="dvPacifico" class="mySlides" style="display: none;">
+                <div class="text text-center h5"><strong>Pacífico</strong></div>
+                <img src="~/Content/img/pacifico.png" class="mx-auto d-block img-fluid p-5 mb-5">
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
