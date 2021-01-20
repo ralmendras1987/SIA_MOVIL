@@ -25,7 +25,8 @@
         Indicadores: 'SIA-F0004 v(1.1.1)'
     }
 }
-var DataSesion = null;
+
+let DataSesion = null;
 
 //Función que abre el modal de carga de transacciones
 $(function () {
@@ -51,7 +52,7 @@ $(function () {
     InitDatePickerOptions();
 
     var sesion = handleSesion.Get();
-    
+
     if (sesion != null) {
 
         EjecutaConsulta.GetSite(Global.LoginController.Name, Global.LoginController.GetClaveEncript, false)
@@ -62,7 +63,7 @@ $(function () {
                 var decrypted = CryptoJS.AES.decrypt(sesion, Global.ClaveEncriptacion);
                 var obj = $.parseJSON(decrypted.toString(CryptoJS.enc.Utf8));
                 DataSesion = obj;
-                Console.log(DataSesion);
+                console.log(DataSesion);
                 $("#lbNombreUsuario").html(obj.NOMBRE);
             });
     }
@@ -76,9 +77,9 @@ $(function () {
                 localStorage.setItem(Global.ObjRemember, objRemember);
                 location.href = location.href = `/${Global.UrlBack}/Login/Login`;
             });
-        
+
     });
-    
+
 });
 
 //Función que cierra el modal de carga de transacciones
@@ -203,7 +204,7 @@ var EjecutaConsulta = function () {
                 $.ajax({
                     type: 'POST',
                     url: `/${Global.UrlBack}/${controller}/${action}`,
-                    data: JSON.stringify({ data: params}),
+                    data: JSON.stringify({ data: params }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     //headers: { "Authorization": 'Bearer ' + localStorage.getItem('Token') },
@@ -269,14 +270,14 @@ var EjecutaConsulta = function () {
 
 //Objeto de funciones que se utlizan para el control de los datos de sesion del usuario una vez esté logueado en el sistema
 var handleSesion = function () {
- 
+
     return {
         Set: function (value) {
             localStorage.setItem(Global.ObjSesion, value);
         },
         Get: function () {
             var value = localStorage.getItem(Global.ObjSesion);
-            return (IsNull(value) == null) ? null : value;       
+            return (IsNull(value) == null) ? null : value;
         }
     }
 
@@ -296,8 +297,7 @@ function GetInputValue(id) {
 }
 
 function AlertToast(type, message) {
-    switch (type)
-    {
+    switch (type) {
         case 'error':
             toastr.error(message);
             break;
@@ -513,3 +513,7 @@ function HandleError(ErrorCod, MsjError) {
 
     }
 }
+
+
+var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
