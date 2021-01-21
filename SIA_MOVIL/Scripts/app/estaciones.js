@@ -43,8 +43,9 @@ var handlePagesStates = function () {
 
             if ($("#dvMeteorologia").css("display") === "none") {
                 $("#dvMeteorologia").show();
+                $("#dvGases").hide();
             } else {
-                $("#dvMeteorologia").hide();
+               // $("#dvMeteorologia").hide();
             }
             if ($("#dvGases").css("display") === "block") {
                 setTimeout(function () {
@@ -58,8 +59,9 @@ var handlePagesStates = function () {
 
             if ($("#dvGases").css("display") === "none") {
                 $("#dvGases").show();
+                $("#dvMeteorologia").hide();
             } else {
-                $("#dvGases").hide();
+                //$("#dvGases").hide();
             }
             if ($("#dvMeteorologia").css("display") === "block") {
                 setTimeout(function () {
@@ -109,6 +111,7 @@ var handleEstaciones = function () {
     function ConsultaDetalleEstacion(planta, estacion, callback = null) {
 
         var fecha = null, rango = RangoDefault;
+        var variable = 0;
         if (IsNull($("#txtFecha").val()) == null) {
             fecha = moment().format('DD-MM-YYYY');
             $("#txtFecha").val(fecha);
@@ -126,6 +129,7 @@ var handleEstaciones = function () {
         var params = {
             PLANTA: planta,
             ESTACION: estacion,
+            VARIABLE: variable,
             FECHA: fecha,
             RANGO: rango,
             USUARIO: DataSesion.USER
