@@ -12,15 +12,21 @@ $("#BtnVolverDetalle").click(function () {
 });
 
 $(function () {
-    SetValidation();
-    ObtieneGrilla();
 
-    $("#CurrentYear").html(new Date().getFullYear());
-    $("#CurrentMonth").html(months[new Date().getMonth()]);
+    setTimeout(function () {
+
+        SetValidation();
+        ObtieneGrilla();
+
+        $("#CurrentYear").html(new Date().getFullYear());
+        $("#CurrentMonth").html(months[new Date().getMonth()]);
 
 
-    $("#btnIndicadores").attr("href", `/${Global.UrlBack}/Home/Index`);
-    $("#CodigoPantalla").html(Global.CodigoPantalla.Indicadores);
+        $("#btnIndicadores").attr("href", `/${Global.UrlBack}/Home/Index`);
+        $("#CodigoPantalla").html(Global.CodigoPantalla.Indicadores);
+
+    }, 500);
+    
 });
 
 function ObtieneGrilla() {

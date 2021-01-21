@@ -29,9 +29,11 @@ var handlePagesStates = function () {
         $('#txtFecha').val(fecha_actual);
         $("#txtRango").val(RangoDefault);
 
-        handleEstaciones.ConsultaEstaciones();
-
         $(".datepicker").datepicker();
+
+        setTimeout(function () {
+            handleEstaciones.ConsultaEstaciones();
+        }, 500);
 
     }
 
