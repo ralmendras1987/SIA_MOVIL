@@ -1,46 +1,47 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Login SIA";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-@Styles.Render("~/Content/Login?r=" + DateTime.Now.ToString("ddmmyymiss"))
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>*@
 
 <div class="card col-md-4 m-5 mx-auto" style="background-color: rgba(255, 255, 255, 0.931);">
     <div class="card-body pt-0">
         <div class="m-0 mx-auto" style="width: 12em; height: 12em; background: #016E3F;">
-            <img src="~/img/logo.png" alt="cmpc" class=" img-fluid d-block mx-auto p-3" style="width: 150px; height: auto;">
-            <img src="~/img/sia.png" alt="cmpc" class=" img-fluid d-block mx-auto p-3" style="width: 100px; height: auto; margin-top: -20px;">
+            <img src="~/Content/img/logo.png" alt="cmpc" class=" img-fluid d-block mx-auto p-3" style="width: 150px; height: auto;">
+            <img src="~/Content/img/sia.png" alt="cmpc" class=" img-fluid d-block mx-auto p-3" style="width: 100px; height: auto; margin-top: -20px;">
             <p class="text-white text-center pr-2 pl-2" style="margin-top: -10px; font-size: 1em;">Sistema de información ambiental</p>
         </div>
 
         <div class="col-12 mx-auto mt-2">
             <p class="text-center mb-0" style="font-size: 1.2em;">¡Bienvenido!</p>
-            <p class="text-center mt-0" style="font-size: 1.2em;">Ingrese sus credeciales</p>
+            <p class="text-center mt-0" style="font-size: 1.2em;">Ingrese sus credenciales</p>
             <form>
                 <div class="form-group">
                     <label>Usuario</label>
-                    <input type="text" class="form-control" id="usuario" required>
+                    <input id="txtUsuario" type="text" class="form-control" placeholder="Ingrese su usuario">
 
                 </div>
                 <div class="form-group">
                     <label>Contraseña</label>
-                    <input type="password" class="form-control" id="contraseña" required>
+                    <input id="txtClave" type="password" class="form-control" placeholder="Ingrese su contraseña">
                 </div>
                 <div class="form-group form-check text-center">
-                    <input type="checkbox" class="form-check-input">
+                    <input id="chkRecordarUser" type="checkbox" class="form-check-input">
                     <label class="form-check-label">Recordarme</label>
                 </div>
-                <button type="submit" class="btn btn-verde btn-block">Ingresar</button>
-                <a href="#" style="text-decoration: none;"><p class="text-center text-dark mt-3" style="text-decoration: underline;">Olvidé mi contraseña</p></a>
+                <button id="btnIngresar" type="button" class="btn btn-verde btn-block">Ingresar</button>
             </form>
         </div>
 
     </div>
+
+    <div class="row">
+        <div id="CodigoPantalla" class="col-12 text-right" style="margin: 15px auto 15px auto; padding-right: 15px;"></div>
+    </div>
 </div>
 
-
-
-@Scripts.Render("~/bundles/Login?r=" + DateTime.Now.ToString("ddmmyymiss"))
-
-
+@section scripts
+{
+    @Scripts.Render("~/js/login")
+}

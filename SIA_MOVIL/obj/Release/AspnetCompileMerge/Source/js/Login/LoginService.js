@@ -2,7 +2,7 @@
 
     $.ajax({
         type: "POST",
-        url: Global.UrlBack + 'Login/IniciarSesion',
+        url: `/${Global.UrlBack}/Login/IniciarSesion`,
         data: JSON.stringify({ Data: JSON.stringify(body) }),
         contentType: "application/json",
         crossDomain: true,
@@ -23,4 +23,5 @@
             wait = false;
         }
     });
+
 };

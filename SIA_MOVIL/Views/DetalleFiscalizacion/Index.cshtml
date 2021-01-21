@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
 }
 
-@Styles.Render("~/css/detalle_fiscalizaciones")
+@Styles.Render("~/css/detalle_fiscalizaciones?r=" + DateTime.Now.ToString("ddmmyymiss"))
 
 <div class="col-12" style="background-color: #016E3F; height: 50px;">
     <div class="row">

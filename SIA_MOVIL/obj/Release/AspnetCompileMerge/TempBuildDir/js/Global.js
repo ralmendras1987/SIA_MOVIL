@@ -1,8 +1,4 @@
-﻿let Global = {
-    UrlBack: '/PortalProveedoresAPI/api/'
-};
-
-let Route = {
+﻿let Route = {
     Login: "/SIA_MOVIL/Login/",
     Home: "/SIA_MOVIL/Login/"
 };

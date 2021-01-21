@@ -1,8 +1,4 @@
-﻿//let Global = {
-//    UrlBack: '/SIA_MOVIL/'
-//};
-
-let Route = {
+﻿let Route = {
     Login: "/SIA_MOVIL/Login/",
     Home: "/SIA_MOVIL/Login/"
 };

@@ -73,7 +73,6 @@ D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.Ident
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.xml
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.xml
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csprojAssemblyReference.cache
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CoreCompileInputs.cache
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
 D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll

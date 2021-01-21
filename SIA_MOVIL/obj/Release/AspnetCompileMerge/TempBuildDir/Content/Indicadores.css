@@ -1,0 +1,137 @@
+﻿
+
+.titulos {
+    color: #016E3F;
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #016E3F;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    color: white;
+}
+
+.btn-met {
+    color: #fff;
+    background-color: #5D5D5D;
+    border-color: #5D5D5D;
+}
+
+.btn-gas {
+    color: #fff;
+    background-color: #5D5D5D;
+    border-color: #5D5D5D;
+}
+
+.btn-met:hover {
+    color: #fff;
+    background-color: #003E7B;
+    border-color: #003E7B;
+}
+
+.btn-met:focus {
+    color: #fff;
+    background-color: #003E7B;
+    border-color: #003E7B;
+}
+
+.btn-gas:hover {
+    color: #fff;
+    background-color: #448F00;
+    border-color: #448F00;
+}
+
+.btn-gas:focus {
+    color: #fff;
+    background-color: #448F00;
+    border-color: #448F00;
+}
+
+.btn-verde {
+    color: #fff;
+    background-color: #448F00;
+    border-color: #448F00;
+}
+
+
+
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: rgb(143, 143, 143);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+        background-color: rgba(218, 216, 216, 0.582);
+    }
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .prev, .next, .text {
+        font-size: 11px
+    }
+}
+
+.bg-planta {
+    background: #01af3b60;
+}
+
+.bg-año {
+    background: #b1b1b160;
+}
+
+.bg-total {
+    background: #2b7bd698;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .table td, .table th {
+        padding: .25rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    h4 {
+        font-size: 18px
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    h4 {
+        margin-top: 8px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    th, td {
+        font-size: 8px
+    }
+}
