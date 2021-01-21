@@ -201,7 +201,7 @@ namespace SIA_MOVIL_MODELO
             return respuesta;
         }
 
-        public static DTORespuesta ConsultaGraficoEstacion(string planta, int estacion, string fecha_inicio, int rango, string usuario)
+        public static DTORespuesta ConsultaGraficoEstacion(string planta, int estacion, string fecha_inicio, int rango, string usuario, int variable)
         {
             DTORespuesta respuesta = new DTORespuesta();
             try
@@ -216,7 +216,7 @@ namespace SIA_MOVIL_MODELO
                 CMD.CommandType = CommandType.StoredProcedure;
 
                 CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, 50).Value = planta;
-                CMD.Parameters.Add("VN_VARIABLE", OracleType.Number).Value = 0;
+                CMD.Parameters.Add("VN_VARIABLE", OracleType.Number).Value = variable;
                 CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = estacion;
                 CMD.Parameters.Add("VV_FechaInicio", OracleType.VarChar, 50).Value = fecha_inicio;
                 CMD.Parameters.Add("VN_RANGO", OracleType.Number).Value = rango;
@@ -234,7 +234,7 @@ namespace SIA_MOVIL_MODELO
                         estaciones.Add(new Dictionary<string, object>() {
                             { "VARIABLE", elem["variable_dsc"].ToString() },
                             { "FECHA", elem["FECHA"].ToString() },
-                            { "VALOR", elem["VALOR"].ToString() },
+                            { "VALOR", elem["VALOR"] },
                             { "ESTADO", elem["ESTADO"].ToString() }
                         });
                     }
@@ -252,7 +252,7 @@ namespace SIA_MOVIL_MODELO
             return respuesta;
         }
 
-        public static DTORespuesta ConsultaTablaEstacion(string planta, int estacion, string fecha_inicio, int rango, string usuario)
+        public static DTORespuesta ConsultaTablaEstacion(string planta, int estacion, string fecha_inicio, int rango, string usuario, int variable)
         {
             DTORespuesta respuesta = new DTORespuesta();
             try
@@ -267,7 +267,7 @@ namespace SIA_MOVIL_MODELO
                 CMD.CommandType = CommandType.StoredProcedure;
 
                 CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, 50).Value = planta;
-                CMD.Parameters.Add("VN_VARIABLE", OracleType.Number).Value = 0;
+                CMD.Parameters.Add("VN_VARIABLE", OracleType.Number).Value = variable;
                 CMD.Parameters.Add("VN_ESTACION", OracleType.Number).Value = estacion;
                 CMD.Parameters.Add("VV_FechaInicio", OracleType.VarChar, 50).Value = fecha_inicio;
                 CMD.Parameters.Add("VN_RANGO", OracleType.Number).Value = rango;

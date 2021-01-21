@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace SIA_MOVIL_API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/Indicadores")]
     public class IndicadoresController : ApiController
     {

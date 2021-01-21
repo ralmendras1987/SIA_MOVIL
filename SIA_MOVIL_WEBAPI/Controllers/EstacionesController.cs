@@ -49,11 +49,12 @@ namespace SIA_MOVIL_WEBAPI.Controllers
                        fecha = param["FECHA"].ToString(),
                        usuario = param["USUARIO"].ToString();
 
-                int estacion = Convert.ToInt32(param["ESTACION"]),
+                int variable = Convert.ToInt32(param["VARIABLE"]), 
+                    estacion = Convert.ToInt32(param["ESTACION"]),
                     rango = Convert.ToInt32(param["RANGO"]);
 
-                var datosGrafico = Metodos.ConsultaGraficoEstacion(planta, estacion, fecha, rango, usuario);
-                var datosTabla = Metodos.ConsultaTablaEstacion(planta, estacion, fecha, rango, usuario);
+                var datosGrafico = Metodos.ConsultaGraficoEstacion(planta, estacion, fecha, rango, usuario, variable);
+                var datosTabla = Metodos.ConsultaTablaEstacion(planta, estacion, fecha, rango, usuario, variable);
 
                 respuesta.Elemento = new Dictionary<string, object>() {
                     { "GRAFICO", (datosGrafico.Resultado == true) ? datosGrafico.Elemento : null },
