@@ -70,42 +70,42 @@ function InitTableGrilla(data) {
                     <td class="text-center bg-planta">
                         <span id="reclamPulpmes">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_MES}</span>
                             </strong>
                         </span>
                     </td>
                     <td class="text-center bg-planta">
                         <span id="reclamPulpaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_AGNO}</span>
                             </strong>
                         </span>
                     </td>
                     <td class="text-center bg-planta">
                         <span id="incidPulpmes">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}','${item.PLANTA_DSC + ' INCIDENTES'}' )">${item.INCIDENTE_MES}</span>
                             </strong>
                         </span>
                     </td>
                     <td class="text-center bg-planta">
                         <span id="incidPulpaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}' ,'${item.PLANTA_DSC + ' INCIDENTES'}')">${item.INCIDENTE_AGNO}</span>
                             </strong>
                         </span>
                     </td>
                     <td class="text-center bg-planta">
                         <span id="fiscPulpmes">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}','${item.PLANTA_DSC + ' FISCALIZACIONES'}' )">${item.FISCALIZACION_MES}</span>
                             </strong>
                         </span>
                     </td>
                     <td class="text-center bg-planta">
                         <span id="fiscPulpaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}' ,'${item.PLANTA_DSC + ' FISCALIZACIONES'}')">${item.FISCALIZACION_AGNO}</span>
                             </strong>
                         </span>
                     </td>
@@ -119,35 +119,35 @@ function InitTableGrilla(data) {
         if (item.PLANTA_ID != "TOT" && item.FILIAL_ID != "0") {
             row = `
                 <tr>
-                    <td class="bg-planta"><span id="plantaForestal">${item.PLANTA_DSC}</span></td>
-                    <td class="text-center bg-planta">
+                    <td class=""><span id="plantaForestal">${item.PLANTA_DSC}</span></td>
+                    <td class="text-center">
                         <span id="reclamForestalchilemes">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_MES}</span>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-año">
                         <span id="reclamForestalchileaño">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_AGNO}</span>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center">
                         <span id="incidForestalchilemes">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}')">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}','${item.PLANTA_DSC + ' INCIDENTES'}')">${item.INCIDENTE_MES}</span>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-año">
                         <span id="incidForestalchileaño">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}' ,'${item.PLANTA_DSC + ' INCIDENTES'}')">${item.INCIDENTE_AGNO}</span>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center">
                         <span id="fiscForestalchilemes">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}','${item.PLANTA_DSC + ' FISCALIZACIONES'}' )">${item.FISCALIZACION_MES}</span>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-año">
                         <span id="fiscForestalchileaño">
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}','${item.PLANTA_DSC + ' FISCALIZACIONES'}' )">${item.FISCALIZACION_AGNO}</span>
                         </span>
                     </td>
 
@@ -162,46 +162,46 @@ function InitTableGrilla(data) {
         if (item.PLANTA_ID == "TOT" && item.FILIAL_ID == "0") {
             row = `
                 <tr>
-                    <td class="bg-planta"><strong><span id="total">${item.PLANTA_DSC}</span></strong></td>
-                    <td class="text-center bg-planta">
+                    <td class="bg-total"><strong><span id="total">${item.PLANTA_DSC}</span></strong></td>
+                    <td class="text-center bg-total">
                         <span id="reclamTotalmes">
                         <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_MES}</span>
                         </strong> 
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-total">
                         <span id="reclamTotalaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.RECLAMO_TIPO}','${item.PLANTA_DSC + ' RECLAMOS'}' )">${item.RECLAMOS_AGNO}</span>
                             </strong>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-total">
                         <span id="incidTotalmes">
                         <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID},'${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID},'${item.PLANTA_ID}','M','${item.INCIDENTE_TIPO}' ,'${item.PLANTA_DSC + ' INCIDENTES'}')">${item.INCIDENTE_MES}</span>
                         </strong>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-total">
                         <span id="incidTotalaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.INCIDENTE_TIPO}','${item.PLANTA_DSC + ' INCIDENTES'}' )">${item.INCIDENTE_AGNO}</span>
                             </strong>
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-total">
                         <span id="fiscTotalmes">
                         <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','M','${item.FISCALIZACION_TIPO}' ,'${item.PLANTA_DSC + ' FISCALIZACIONES'}')">${item.FISCALIZACION_MES}</span>
                         </strong>                       
                         </span>
                     </td>
-                    <td class="text-center bg-planta">
+                    <td class="text-center bg-total">
                         <span id="fiscTotalaño">
                             <strong>
-                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}' )">${item.FISCALIZACION_AGNO}</span>
+                            <span style="color: inherit; text-decoration: inherit; cursor: pointer" onclick="ObtieneDetalle('${item.FILIAL_ID}','${item.PLANTA_ID}','A','${item.FISCALIZACION_TIPO}','${item.PLANTA_DSC + ' FISCALIZACIONES'}' )">${item.FISCALIZACION_AGNO}</span>
                             </strong>
                         </span>
                     </td>
@@ -225,7 +225,7 @@ function InitTableGrilla(data) {
 
 
 
-function ObtieneDetalle(FILIAL, PLANTA, TIPO_FECHA, TIPO_INDICADOR) {
+function ObtieneDetalle(FILIAL, PLANTA, TIPO_FECHA, TIPO_INDICADOR, TITULO) {
 
     DETALLE = {
 
@@ -241,12 +241,12 @@ function ObtieneDetalle(FILIAL, PLANTA, TIPO_FECHA, TIPO_INDICADOR) {
     GetDetalle_Service(DETALLE, function (res) {
 
         DETALLE = res;
-        InitTableDetalle(DETALLE.DETALLE);
+        InitTableDetalle(DETALLE.DETALLE, TITULO);
     });
 
 }
 
-function InitTableDetalle(data) {
+function InitTableDetalle(data, titulo) {
 
     if (data.length <= 0) {
         toastr.warning("No hay registros", "Advertencia");
@@ -262,6 +262,8 @@ function InitTableDetalle(data) {
 
     $("#BodyDetalle").empty();
 
+    $("#TituloDetalle").html(titulo);
+    
     data.forEach(function (item, i) {
 
         var row = "";
@@ -274,14 +276,19 @@ function InitTableDetalle(data) {
                     <p><strong>${item.FECHA}</strong></p>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <p>
                             <strong>Planta: </strong><span id="planta">${item.PLANTA_DSC}</span>
                         </p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-3">
                         <p>
                             <strong>Organismo: </strong><span id="organismo">${item.ORGANISMO}</span>
+                        </p>
+                    </div>
+                        <div class="col-3">
+                        <p>
+                            <strong>Tipo: </strong><span id="organismo">${item.TIPO}</span>
                         </p>
                     </div>
                     <div class="col-12">

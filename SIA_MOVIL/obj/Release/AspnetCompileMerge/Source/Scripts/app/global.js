@@ -1,7 +1,8 @@
 ﻿var Global = {
     UrlBack: 'SIA_MOVIL',
-    //UrlApi: 'http://desarrollocmpc.genesys.cl:112/SIA_MOVIL/SIA_MOVIL_WEBAPI/api',
-    UrlApi: 'http://localhost:9770/SIA_MOVIL_WEBAPI/api',
+    //UrlApi: 'http://desarrollocmpc.genesys.cl:112/SIA_MOVIL_WEBAPI/api',
+    //UrlApi: 'http://localhost:9770/SIA_MOVIL_WEBAPI/api',
+    UrlApi: '/SIA_MOVIL_WEBAPI/api',
     ObjSesion: 'obj1',
     ObjRemember: 'obj2',
     Token: 'obj3',
