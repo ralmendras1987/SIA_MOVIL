@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Login SIA</title>
+
+    @Scripts.Render("~/bundles/modernizr?r=" + DateTime.Now.ToString("ddmmyymiss"))
+    @Scripts.Render("~/bundles/jquery?r=" + DateTime.Now.ToString("ddmmyymiss"))
+
+    @Styles.Render("~/bundles/styles?r=" + DateTime.Now.ToString("ddmmyymiss"))
+    @Styles.Render("~/Content/css/login.css?r=" + DateTime.Now.ToString("ddmmyymiss"))
+</head>
+<body>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @Html.Partial("_LoadingModal")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -12,7 +12,7 @@ namespace SIA_MOVIL_WEBAPI.Controllers
         {
             ViewBag.Title = "Home Page";
 
-            return View();
+            return View("~/Views/Home/Index.cshtml");
         }
     }
 }

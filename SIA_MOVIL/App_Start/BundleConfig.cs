@@ -25,9 +25,9 @@ namespace SIA_MOVIL
                       "~/Content/bootstrap.css",
                       "~/Content/toastr.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/Login").Include(
-                     "~/js/Login/LoginService.js","~/js/Login/Login.js"
-                     ));
+            //bundles.Add(new ScriptBundle("~/bundles/Login").Include(
+            //         "~/js/Login/LoginService.js","~/js/Login/Login.js"
+            //         ));
 
             bundles.Add(new StyleBundle("~/Content/Login").Include(
                       "~/Content/Login.css"));
@@ -65,7 +65,7 @@ namespace SIA_MOVIL
                     "~/Scripts/crypto-js.min.js",
                     "~/Scripts/app/global.js"));
 
-            bundles.Add(new ScriptBundle("~/js/login").Include("~/Scripts/app/login.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Login").Include("~/js/Login/Login.js"));
             bundles.Add(new ScriptBundle("~/js/estaciones").Include("~/Scripts/app/estaciones.js"));
 
             #endregion

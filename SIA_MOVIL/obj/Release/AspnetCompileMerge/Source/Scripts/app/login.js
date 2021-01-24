@@ -71,8 +71,9 @@ var handlePagesStates = function () {
                             }
                             EjecutaConsulta.PostSite('Login', 'SeteaTokenSession', params, false)
                                 .then(result => {
+                                    null;
                                     if (result.Resultado)
-                                        location.href = location.href = `/${Global.UrlBack}/Home/Index`;
+                                        location.href = `/${Global.UrlBack}/Home/Index`;
                                 });
                         }
                         else {

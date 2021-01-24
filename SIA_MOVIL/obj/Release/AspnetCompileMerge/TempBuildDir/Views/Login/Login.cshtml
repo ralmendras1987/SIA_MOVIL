@@ -5,7 +5,7 @@
 
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>*@
 
-<div class="card col-md-4 m-5 mx-auto" style="background-color: rgba(255, 255, 255, 0.931);">
+<div class="card col-sm-10 col-md-10 col-lg-8 col-xl-6 m-5 mx-auto" style="background-color: rgba(255, 255, 255, 0.931);">
     <div class="card-body pt-0">
         <div class="m-0 mx-auto" style="width: 12em; height: 12em; background: #016E3F;">
             <img src="~/Content/img/logo.png" alt="cmpc" class=" img-fluid d-block mx-auto p-3" style="width: 150px; height: auto;">
@@ -43,5 +43,5 @@
 
 @section scripts
 {
-    @Scripts.Render("~/js/login")
+    @Scripts.Render("~/bundles/Login?PARAMETRO=" + DateTime.Now.ToString("ddmmyymiss"))
 }

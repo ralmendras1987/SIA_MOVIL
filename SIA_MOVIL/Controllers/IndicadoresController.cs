@@ -16,15 +16,13 @@ namespace SIA_MOVIL.Controllers
         // GET: Indicadores
         public ActionResult Index()
         {
-            Session["UserSession"] = "";
-            Session["TokenSession"] = "";
+
             return View("~/Views/Indicadores/Index.cshtml");
         }
 
         public ActionResult Indicadores()
         {
-            Session["UserSession"] = "";
-            Session["TokenSession"] = "";
+
             return View("~/Views/Indicadores/Index.cshtml");
         }
 
