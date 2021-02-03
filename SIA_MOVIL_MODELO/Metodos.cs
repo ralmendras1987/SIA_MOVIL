@@ -12,7 +12,30 @@ namespace SIA_MOVIL_MODELO
             try
             {
                 DATA.USER_DATA.USER = DATA.USER_DATA.USER.ToUpper();
+                string str_con_login = Comun._STR_CON_LOGIN(DATA.USER_DATA.USER, DATA.USER_DATA.PASS);
 
+                OracleConnection CONLOGIN = new OracleConnection(str_con_login);
+
+                try
+                {
+                    CONLOGIN.Open();
+
+                }
+                catch(Exception e)
+                {
+                    CONLOGIN.Close();
+                    CONLOGIN.Dispose();
+
+                    DATA.ERROR_ID = 1;
+                    DATA.ERROR_DSC = "Usuario o Contraseña incorrecta.";
+                    DATA.USER_DATA.PASS = string.Empty;
+                    return;
+                }
+                finally
+                {
+                    CONLOGIN.Close();
+                    CONLOGIN.Dispose();
+                }
 
                 DataTable DT = new DataTable();
 
@@ -234,7 +257,7 @@ namespace SIA_MOVIL_MODELO
                         estaciones.Add(new Dictionary<string, object>() {
                             { "VARIABLE", elem["variable_dsc"].ToString() },
                             { "FECHA", elem["FECHA"].ToString() },
-                            { "VALOR", elem["VALOR"] },
+                            { "VALOR", elem["VALOR"].ToString() },
                             { "ESTADO", elem["ESTADO"].ToString() }
                         });
                     }
@@ -290,7 +313,8 @@ namespace SIA_MOVIL_MODELO
                             { "ESTACION_FECHA", elem["estacion_Fecha"].ToString() },
                             { "CLASE", elem["clase"].ToString() },
                             { "UNIDAD", elem["unidad"].ToString() },
-                            { "VALOR", elem["VALOR"].ToString() }
+                            { "VALOR", elem["VALOR"].ToString() },
+                            { "VALOR_ALARMA", elem["VALOR_ALARMA"] }
                         });
                     }
                 }

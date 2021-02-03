@@ -29,6 +29,7 @@ namespace SIA_MOVIL_MODELO
     {
         public string VN_FILIAL = string.Empty;
         public string VV_PLANTA = string.Empty;
+        public string VV_FECHAINICIO = string.Empty;
         public string VV_TIPO_FECHA = string.Empty;
         public string VN_TIPO_INDICADOR = string.Empty;
         public string VV_USUARIO = string.Empty;
@@ -158,6 +159,7 @@ namespace SIA_MOVIL_MODELO
 
                 CMD.Parameters.Add("VN_FILIAL", OracleType.Number).Value = Comun.VALIDA_NULO(DATA.VN_FILIAL);
                 CMD.Parameters.Add("VV_PLANTA", OracleType.VarChar, 50).Value = Comun.VALIDA_NULO(DATA.VV_PLANTA);
+                CMD.Parameters.Add("VV_FECHAINICIO", OracleType.VarChar, 50).Value = Comun.VALIDA_NULO(DATA.VV_FECHAINICIO);
                 CMD.Parameters.Add("VV_TIPO_FECHA", OracleType.VarChar, 50).Value = Comun.VALIDA_NULO(DATA.VV_TIPO_FECHA);
                 CMD.Parameters.Add("VN_TIPO_INDICADOR", OracleType.Number).Value = Comun.VALIDA_NULO(DATA.VN_TIPO_INDICADOR);
                 CMD.Parameters.Add("VV_USUARIO", OracleType.VarChar, 50).Value = Comun.VALIDA_NULO(DATA.VV_USUARIO);

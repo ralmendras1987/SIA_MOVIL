@@ -14,6 +14,7 @@ namespace SIA_MOVIL_MODELO
         public int _TIEMPO_EXPIRA_SESION = 120;
         public string _VERSION = string.Empty;
         public string _STR_CON = string.Empty;
+        public string _SOURCE = string.Empty;
         public string _USUARIO = string.Empty;
         public string _PASS = string.Empty;
         public bool _TESTING = false;
@@ -179,6 +180,38 @@ namespace SIA_MOVIL_MODELO
             catch (Exception e)
             {
                 return false;
+
+            }
+
+        }
+
+        public static string _SOURCE()
+        {
+            try
+            {
+                Config JSON = RETORNA_CONFIG();
+                return JSON._SOURCE;
+            }
+            catch (Exception e)
+            {
+                return "";
+
+            }
+
+        }
+
+
+        public static string _STR_CON_LOGIN(string user, string pass)
+        {
+            try
+            {
+                Config JSON = RETORNA_CONFIG();
+                String source = JSON._SOURCE;
+                return "Data Source="+ source + ";User Id="+ user + ";Password=" + pass + ";Pooling=no;Pooling=false;Connection Lifetime=60;";  
+            }
+            catch (Exception e)
+            {
+                return "";
 
             }
 

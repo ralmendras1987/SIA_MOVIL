@@ -272,6 +272,7 @@
     <Content Include="js\Login\Login.js" />
     <Content Include="js\Login\LoginService.js" />
     <Content Include="Scripts\97fa47432f.js" />
+    <Content Include="Scripts\app\estaciones - Copia.js" />
     <Content Include="Scripts\app\estaciones.js" />
     <Content Include="Scripts\app\global.js" />
     <Content Include="Scripts\app\login.js" />
@@ -413,6 +414,7 @@
     <Content Include="Views\DetalleFiscalizacion\Index.cshtml" />
     <Content Include="Views\Shared\_LoadingModal.cshtml" />
     <Content Include="Views\Home\_detalleEstacion.cshtml" />
+    <Content Include="Views\Home\_detalleVariable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
