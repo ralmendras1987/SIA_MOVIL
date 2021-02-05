@@ -80,10 +80,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/25/2021 16:33:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/28/2021 11:29:11</publishTime>
+      <publishTime>02/04/2021 18:04:04</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/28/2021 11:29:11</publishTime>
+      <publishTime>02/04/2021 18:04:04</publishTime>
     </File>
     <File Include="bin/es/System.Net.Http.Formatting.resources.dll">
       <publishTime>01/25/2021 16:33:50</publishTime>
@@ -227,19 +227,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/25/2021 16:33:52</publishTime>
     </File>
     <File Include="bin/SIA_MOVIL.dll">
-      <publishTime>01/28/2021 11:28:54</publishTime>
+      <publishTime>02/04/2021 18:03:54</publishTime>
     </File>
     <File Include="bin/SIA_MOVIL.pdb">
-      <publishTime>01/28/2021 11:28:54</publishTime>
+      <publishTime>02/04/2021 18:03:54</publishTime>
     </File>
     <File Include="bin/SIA_MOVIL_MODELO.dll">
-      <publishTime>01/28/2021 11:28:50</publishTime>
+      <publishTime>02/04/2021 18:03:50</publishTime>
     </File>
     <File Include="bin/SIA_MOVIL_MODELO.dll.config">
       <publishTime>01/25/2021 16:33:48</publishTime>
     </File>
     <File Include="bin/SIA_MOVIL_MODELO.pdb">
-      <publishTime>01/28/2021 11:28:50</publishTime>
+      <publishTime>02/04/2021 18:03:50</publishTime>
     </File>
     <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
       <publishTime>01/25/2021 16:33:53</publishTime>
@@ -317,7 +317,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/25/2021 16:33:41</publishTime>
     </File>
     <File Include="Content/css/estacion.css">
-      <publishTime>01/25/2021 16:33:41</publishTime>
+      <publishTime>01/28/2021 18:15:52</publishTime>
     </File>
     <File Include="Content/css/indicadores.css">
       <publishTime>01/25/2021 16:33:41</publishTime>
@@ -470,28 +470,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/25/2021 16:33:42</publishTime>
     </File>
     <File Include="js/Indicadores/Indicadores.js">
-      <publishTime>01/25/2021 16:33:42</publishTime>
+      <publishTime>02/03/2021 10:43:58</publishTime>
     </File>
     <File Include="js/Indicadores/IndicadoresService.js">
       <publishTime>01/25/2021 16:33:42</publishTime>
     </File>
     <File Include="js/Login/Login.js">
-      <publishTime>01/25/2021 16:33:42</publishTime>
+      <publishTime>02/04/2021 17:47:22</publishTime>
     </File>
     <File Include="js/Login/LoginService.js">
       <publishTime>01/25/2021 16:33:42</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/28/2021 11:29:00</publishTime>
+      <publishTime>02/04/2021 18:03:55</publishTime>
     </File>
     <File Include="Scripts/97fa47432f.js">
       <publishTime>01/25/2021 16:33:41</publishTime>
     </File>
+    <File Include="Scripts/app/estaciones - Copia.js">
+      <publishTime>02/03/2021 15:45:04</publishTime>
+    </File>
     <File Include="Scripts/app/estaciones.js">
-      <publishTime>01/25/2021 16:33:41</publishTime>
+      <publishTime>02/03/2021 17:52:32</publishTime>
     </File>
     <File Include="Scripts/app/global.js">
-      <publishTime>01/25/2021 16:33:41</publishTime>
+      <publishTime>01/28/2021 18:31:55</publishTime>
     </File>
     <File Include="Scripts/app/login.js">
       <publishTime>01/25/2021 16:33:41</publishTime>
@@ -833,10 +836,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/25/2021 16:33:41</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/25/2021 16:33:41</publishTime>
+      <publishTime>02/03/2021 15:29:31</publishTime>
     </File>
     <File Include="Views/Home/_detalleEstacion.cshtml">
-      <publishTime>01/25/2021 16:33:41</publishTime>
+      <publishTime>02/03/2021 17:14:41</publishTime>
+    </File>
+    <File Include="Views/Home/_detalleVariable.cshtml">
+      <publishTime>02/01/2021 12:37:12</publishTime>
     </File>
     <File Include="Views/Indicadores/Index.cshtml">
       <publishTime>01/25/2021 16:33:41</publishTime>

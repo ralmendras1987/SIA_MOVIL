@@ -93,6 +93,12 @@ function CloseLoading() {
     $('.loading').hide();
 }
 
+function ReplaceAll(text, busca, reemplaza) {
+    while (text.toString().indexOf(busca) != -1)
+        text = text.toString().replace(busca, reemplaza);
+    return text;
+}
+
 //Objeto que provee de metodos para realizar peticiones get y post a los metodos en los controladores
 var EjecutaConsulta = function () {
     return {

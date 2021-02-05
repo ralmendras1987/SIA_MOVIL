@@ -1,4 +1,18 @@
-﻿.btn-met {
+﻿.container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+    width: 100%;
+     padding-right: 0px; 
+     padding-left: 0px; 
+     margin-right: auto; 
+     margin-left: auto; 
+}
+
+.color-alarma {
+    color: #fff;
+    background-color: #FFFF00;
+    border-color: #FFFF00;
+}
+
+.btn-met {
     color: #fff;
     background-color: #5D5D5D;
     border-color: #5D5D5D;

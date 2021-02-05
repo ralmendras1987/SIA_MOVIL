@@ -6,8 +6,13 @@
 
 var ListaEstaciones = [];
 var EstacionIndex = null;
+var VariableIndex = null;
 var RangoDefault = 4;
 var objEstacion = null;
+
+var VariableId = null;
+var PlantaId = null;
+var EstacionDsc = null;
 
 var slideIndex = 1;
 
@@ -16,6 +21,11 @@ $(document).ready(function () {
     handlePagesStates.init();
 
 });
+
+function VolverEstaciones() {
+    $("#divPrincipal").show();
+    $("#divDetalle").hide();
+}
 
 var handlePagesStates = function () {
 
@@ -30,6 +40,10 @@ var handlePagesStates = function () {
         $("#txtRango").val(RangoDefault);
 
         $(".datepicker").datepicker();
+         
+        $("#divPrincipal").show();
+        $("#divDetalle").hide();
+        
 
         setTimeout(function () {
             handleEstaciones.ConsultaEstaciones();
@@ -45,14 +59,14 @@ var handlePagesStates = function () {
                 $("#dvMeteorologia").show();
                 $("#dvGases").hide();
             } else {
-               // $("#dvMeteorologia").hide();
+                // $("#dvMeteorologia").hide();
             }
             if ($("#dvGases").css("display") === "block") {
                 setTimeout(function () {
                     $("#dvGases").hide();
                 }, 1000);
             }
-            
+
         });
 
         $("#btnGases").on("click", function (e) {
@@ -76,11 +90,15 @@ var handlePagesStates = function () {
     function handleGenericEvents() {
 
         $("#txtFecha").on("change", function (e) {
-            handleEstaciones.CargaDetalleEstacion();
+            //handleEstaciones.CargaDetalleEstacion();
+            handleEstaciones.CargaDetalleGrafico(PlantaId, VariableId);
+            handleEstaciones.CargaDetalleVariable(PlantaId, VariableId);
         });
 
         $("#txtRango").on("blur", function (e) {
-            handleEstaciones.CargaDetalleEstacion();
+            //handleEstaciones.CargaDetalleEstacion();
+            handleEstaciones.CargaDetalleGrafico(PlantaId, VariableId);
+            handleEstaciones.CargaDetalleVariable(PlantaId, VariableId);
         });
     }
 
@@ -141,6 +159,9 @@ var handleEstaciones = function () {
                     callback(response);
             });
 
+        $("#divPrincipal").hide();
+        $("#divDetalle").show();
+
     }
 
     function CargaDetalleEstacion() {
@@ -154,18 +175,22 @@ var handleEstaciones = function () {
 
                         $("#CodigoPantalla").html(Global.CodigoPantalla.ComportamientoVariables);
 
+                        EstacionDsc = 'Estación ' + element.ESTACION_DSC;
+
                         $('#lbNombreEstacion').text('Estación ' + element.ESTACION_DSC);
                         $('#lbTRS').text(element.TRS + ' ppb');
                         $("#dvDetalleEstacion").show("medium");
                         $("#dvListaEstaciones").hide("medium");
 
+                        $("#divPrincipal").show();
+                        $("#divDetalle").hide();
+
                         var data = response.Elemento;
-                        handleDataDetalleEstacion.CargaGrafico(data.GRAFICO);
+                        //handleDataDetalleEstacion.CargaGrafico(data.GRAFICO);
                         handleDataDetalleEstacion.CargaTablasVariables(data.TABLA);
                         $("#dvGases").show();
 
-                        switch (objEstacion.PLANTA_ID)
-                        {
+                        switch (objEstacion.PLANTA_ID) {
                             case 'LAJ':
                                 $("#dvLaja").show();
                                 break;
@@ -182,6 +207,81 @@ var handleEstaciones = function () {
 
             }
         })
+
+    }
+
+    function ConsultaDetalleGrafico(planta, estacion, variable, callback = null) {
+
+        var fecha = null, rango = RangoDefault;
+        //var variable = 0;
+        if (IsNull($("#txtFecha").val()) == null) {
+            fecha = moment().format('DD-MM-YYYY');
+            $("#txtFecha").val(fecha);
+        }
+        else
+            fecha = $("#txtFecha").val();
+
+        if (IsNull($("#txtRango").val()) == null) {
+            rango = RangoDefault;
+            $("#txtRango").val(RangoDefault);
+        }
+        else
+            rango = $("#txtRango").val();
+
+        var params = {
+            PLANTA: planta,
+            ESTACION: estacion,
+            VARIABLE: variable,
+            FECHA: fecha,
+            RANGO: rango,
+            USUARIO: DataSesion.USER
+        }
+
+        EjecutaConsulta.Post(Global.EstacionesController.Name, Global.EstacionesController.ConsultaDetalleEstacion, params, true)
+            .then(response => {
+                if (callback != null)
+                    callback(response);
+            });
+
+        $("#divPrincipal").hide();
+        $("#divDetalle").show();
+
+    }
+
+    function CargaDetalleGrafico(planta, variable) {
+
+        //ListaEstaciones.map((element, i) => {
+        //    if (i == EstacionIndex) {
+        //        objEstacion = element;
+
+                    handleEstaciones.ConsultaDetalleGrafico(planta, 0, variable, function (response) {
+                    if (response.Resultado) {
+
+                        $("#CodigoPantalla").html(Global.CodigoPantalla.ComportamientoVariables);
+
+                       
+                        $("#dvDetalleEstacion").show("medium");
+                        $("#dvListaEstaciones").hide("medium");
+
+                        $("#divPrincipal").hide();
+                        $("#divDetalle").show();
+
+                        var data = response.Elemento;
+                        //console.log(data);
+
+                        var variable_dsc = (IsNull(data[0]) == null) ? '' : data[0].VARIABLE;
+                        $('#lbNombreEstacion').text(EstacionDsc);
+                        $('#lbTRS').text(variable_dsc);
+
+                        handleDataDetalleEstacion.CargaGrafico(data.GRAFICO);
+                        
+                        
+
+                    }
+                });
+
+        //    }
+        //})
 
     }
 
@@ -215,13 +315,43 @@ var handleEstaciones = function () {
                     callback(response);
             });
 
+         
+
+        $("#divPrincipal").hide();
+        $("#divDetalle").show();
+
     }
+
+    function CargaDetalleVariable(planta, variable) {
+
+
+        handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
+
+            SetColumnsTable(tableHeaderModal)
+                .then(res => {
+                    $('#table-list-head').html(`<tr>${res}</tr>`);
+                    handleDataHtml.LlenaTablaModal(response.Elemento);
+
+                    //setTimeout(function () {
+                    //    $('#modalTrs').modal("show");
+                    //}, 250);
+                });
+
+        });
+
+     
+
+    }  
+
 
     return {
         ConsultaEstaciones: ConsultaEstaciones,
         ConsultaDetalleEstacion: ConsultaDetalleEstacion,
         CargaDetalleEstacion: CargaDetalleEstacion,
-        ConsultaDetalleVariable: ConsultaDetalleVariable
+        ConsultaDetalleVariable: ConsultaDetalleVariable,
+        ConsultaDetalleGrafico: ConsultaDetalleGrafico,
+        CargaDetalleGrafico: CargaDetalleGrafico,
+        CargaDetalleVariable: CargaDetalleVariable
     }
 
 }();
@@ -302,16 +432,16 @@ var handleDataHtml = function () {
         $("#lbFechaMeteorologia").text(fecha);
 
         $.each(data, function (i, element) {
-
+ 
             let row = '';
             row += `<a href="javascript:void(0);" class="VerVariableMeteorologia" data-id="${element.VARIABLE_ID}" data-planta="${element.PLANTA_ID}" style="text-decoration: inherit; color: inherit;">
                         <div class="row border-bottom mb-2">
-                            <div class="col-6">
+                            <div class="col-8">
                                 <h6><strong>${element.VARIABLE_DSC}</strong></h6>
                                 <p>Unidad: ${element.UNIDAD}</p>
                             </div>
-                            <div class="col-6">
-                                <h4 class="text-right mr-5"><span>${element.VALOR}</span></h4>
+                            <div class="col-4 pl-0 pr-0">
+                                <h5 class="text-right mr-2"><span  class="${(element.VALOR_ALARMA == 2) ? 'bg-warning' : ''}">${element.VALOR}</span></h5>
                             </div>
                         </div>
                     </a>`;
@@ -319,23 +449,53 @@ var handleDataHtml = function () {
 
         });
 
+        //$(".VerVariableMeteorologia").on("click", function (e) {
+
+        //    var planta = $(this).attr("data-planta");
+        //    var variable = $(this).attr("data-id");
+        //    handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
+
+        //        SetColumnsTable(tableHeaderModal)
+        //            .then(res => {
+        //                $('#table-list-head').html(`<tr>${res}</tr>`);
+        //                LlenaTablaModal(response.Elemento);
+
+        //                setTimeout(function () {
+        //                    $('#modalTrs').modal("show");
+        //                }, 250);
+        //            });
+
+        //    });
+
+        //});
+
         $(".VerVariableMeteorologia").on("click", function (e) {
 
             var planta = $(this).attr("data-planta");
             var variable = $(this).attr("data-id");
-            handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
 
-                SetColumnsTable(tableHeaderModal)
-                    .then(res => {
-                        $('#table-list-head').html(`<tr>${res}</tr>`);
-                        LlenaTablaModal(response.Elemento);
+            VariableId = variable;
+            PlantaId = planta;
 
-                        setTimeout(function () {
-                            $('#modalTrs').modal("show");
-                        }, 250);
-                    });            
-                
-            });
+            handleEstaciones.CargaDetalleGrafico(planta, variable);
+            handleEstaciones.CargaDetalleVariable(planta, variable);
+
+            
+
+            //handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
+
+            //    SetColumnsTable(tableHeaderModal)
+            //        .then(res => {
+            //            $('#table-list-head').html(`<tr>${res}</tr>`);
+            //            LlenaTablaModal(response.Elemento);
+
+            //            //setTimeout(function () {
+            //            //    $('#modalTrs').modal("show");
+            //            //}, 250);
+            //        });
+
+            //});
+            
 
         });
 
@@ -353,12 +513,12 @@ var handleDataHtml = function () {
             let row = '';
             row += `<a href="javascript:void(0);" class="VerVariableGases" data-id="${element.VARIABLE_ID}" data-planta="${element.PLANTA_ID}" style="text-decoration: inherit; color: inherit;">
                         <div class="row border-bottom mb-2">
-                            <div class="col-6">
+                            <div class="col-8">
                                 <h6><strong>${element.VARIABLE_DSC}</strong></h6>
                                 <p>Unidad: ${element.UNIDAD}</p>
                             </div>
-                            <div class="col-6">
-                                <h4 class="text-right mr-5"><span>${element.VALOR}</span></h4>
+                            <div class="col-4 pl-0 pr-0">
+                                <h5 class="text-right mr-2"><span   class="${(element.VALOR_ALARMA == 2) ? 'bg-warning' : ''}">${element.VALOR}</span></h5>
                             </div>
                         </div>
                     </a>`;
@@ -370,19 +530,26 @@ var handleDataHtml = function () {
 
             var planta = $(this).attr("data-planta");
             var variable = $(this).attr("data-id");
-            handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
 
-                SetColumnsTable(tableHeaderModal)
-                    .then(res => {
-                        $('#table-list-head').html(`<tr>${res}</tr>`);
-                        LlenaTablaModal(response.Elemento);
+            VariableId = variable;
+            PlantaId = planta;
 
-                        setTimeout(function () {
-                            $('#modalTrs').modal("show");
-                        }, 250);
-                    });
+            handleEstaciones.CargaDetalleGrafico(planta, variable);
+            handleEstaciones.CargaDetalleVariable(planta, variable);
 
-            });
+            //handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
+
+            //    SetColumnsTable(tableHeaderModal)
+            //        .then(res => {
+            //            $('#table-list-head').html(`<tr>${res}</tr>`);
+            //            LlenaTablaModal(response.Elemento);
+
+            //            //setTimeout(function () {
+            //            //    $('#modalTrs').modal("show");
+            //            //}, 250);
+            //        });
+
+            //});
 
         });
     }
@@ -407,7 +574,8 @@ var handleDataHtml = function () {
     return {
         LlenarData: LlenarData,
         LlenaDataMetereologia: LlenaDataMetereologia,
-        LlenaDataGases: LlenaDataGases
+        LlenaDataGases: LlenaDataGases,
+        LlenaTablaModal: LlenaTablaModal
     }
 
 }();
@@ -465,7 +633,8 @@ var handleDataDetalleEstacion = function () {
                     UNIDAD: element.UNIDAD,
                     VALOR: element.VALOR,
                     VARIABLE_DSC: element.VARIABLE_DSC,
-                    VARIABLE_ID: element.VARIABLE_ID
+                    VARIABLE_ID: element.VARIABLE_ID,
+                    VALOR_ALARMA: element.VALOR_ALARMA
                 });
             }
             if (element.CLASE == 'GASES') {
@@ -476,7 +645,8 @@ var handleDataDetalleEstacion = function () {
                     UNIDAD: element.UNIDAD,
                     VALOR: element.VALOR,
                     VARIABLE_DSC: element.VARIABLE_DSC,
-                    VARIABLE_ID: element.VARIABLE_ID
+                    VARIABLE_ID: element.VARIABLE_ID,
+                    VALOR_ALARMA: element.VALOR_ALARMA
                 });
             }
         });

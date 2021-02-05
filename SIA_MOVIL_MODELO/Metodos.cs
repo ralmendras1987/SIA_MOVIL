@@ -21,7 +21,7 @@ namespace SIA_MOVIL_MODELO
                     CONLOGIN.Open();
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     CONLOGIN.Close();
                     CONLOGIN.Dispose();

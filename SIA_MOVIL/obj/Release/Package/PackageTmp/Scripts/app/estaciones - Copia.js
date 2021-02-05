@@ -10,10 +10,6 @@ var VariableIndex = null;
 var RangoDefault = 4;
 var objEstacion = null;
 
-var VariableId = null;
-var PlantaId = null;
-var EstacionDsc = null;
-
 var slideIndex = 1;
 
 $(document).ready(function () {
@@ -90,15 +86,11 @@ var handlePagesStates = function () {
     function handleGenericEvents() {
 
         $("#txtFecha").on("change", function (e) {
-            //handleEstaciones.CargaDetalleEstacion();
-            handleEstaciones.CargaDetalleGrafico(PlantaId, VariableId);
-            handleEstaciones.CargaDetalleVariable(PlantaId, VariableId);
+            handleEstaciones.CargaDetalleEstacion();
         });
 
         $("#txtRango").on("blur", function (e) {
-            //handleEstaciones.CargaDetalleEstacion();
-            handleEstaciones.CargaDetalleGrafico(PlantaId, VariableId);
-            handleEstaciones.CargaDetalleVariable(PlantaId, VariableId);
+            handleEstaciones.CargaDetalleEstacion();
         });
     }
 
@@ -175,8 +167,6 @@ var handleEstaciones = function () {
 
                         $("#CodigoPantalla").html(Global.CodigoPantalla.ComportamientoVariables);
 
-                        EstacionDsc = 'Estación ' + element.ESTACION_DSC;
-
                         $('#lbNombreEstacion').text('Estación ' + element.ESTACION_DSC);
                         $('#lbTRS').text(element.TRS + ' ppb');
                         $("#dvDetalleEstacion").show("medium");
@@ -210,81 +200,6 @@ var handleEstaciones = function () {
 
     }
 
-    function ConsultaDetalleGrafico(planta, estacion, variable, callback = null) {
-
-        var fecha = null, rango = RangoDefault;
-        //var variable = 0;
-        if (IsNull($("#txtFecha").val()) == null) {
-            fecha = moment().format('DD-MM-YYYY');
-            $("#txtFecha").val(fecha);
-        }
-        else
-            fecha = $("#txtFecha").val();
-
-        if (IsNull($("#txtRango").val()) == null) {
-            rango = RangoDefault;
-            $("#txtRango").val(RangoDefault);
-        }
-        else
-            rango = $("#txtRango").val();
-
-        var params = {
-            PLANTA: planta,
-            ESTACION: estacion,
-            VARIABLE: variable,
-            FECHA: fecha,
-            RANGO: rango,
-            USUARIO: DataSesion.USER
-        }
-
-        EjecutaConsulta.Post(Global.EstacionesController.Name, Global.EstacionesController.ConsultaDetalleEstacion, params, true)
-            .then(response => {
-                if (callback != null)
-                    callback(response);
-            });
-
-        $("#divPrincipal").hide();
-        $("#divDetalle").show();
-
-    }
-
-    function CargaDetalleGrafico(planta, variable) {
-
-        //ListaEstaciones.map((element, i) => {
-        //    if (i == EstacionIndex) {
-        //        objEstacion = element;
-
-                    handleEstaciones.ConsultaDetalleGrafico(planta, 0, variable, function (response) {
-                    if (response.Resultado) {
-
-                        $("#CodigoPantalla").html(Global.CodigoPantalla.ComportamientoVariables);
-
-                       
-                        $("#dvDetalleEstacion").show("medium");
-                        $("#dvListaEstaciones").hide("medium");
-
-                        $("#divPrincipal").hide();
-                        $("#divDetalle").show();
-
-                        var data = response.Elemento;
-                        //console.log(data);
-
-                        var variable_dsc = (IsNull(data[0]) == null) ? '' : data[0].VARIABLE;
-                        $('#lbNombreEstacion').text(EstacionDsc);
-                        $('#lbTRS').text(variable_dsc);
-
-                        handleDataDetalleEstacion.CargaGrafico(data.GRAFICO);
-                        
-                        
-
-                    }
-                });
-
-        //    }
-        //})
-
-    }
-
     function ConsultaDetalleVariable(planta, variable, callback = null) {
 
         var fecha = null, rango = RangoDefault;
@@ -315,43 +230,16 @@ var handleEstaciones = function () {
                     callback(response);
             });
 
-         
-
         $("#divPrincipal").hide();
         $("#divDetalle").show();
 
     }
 
-    function CargaDetalleVariable(planta, variable) {
-
-
-        handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
-
-            SetColumnsTable(tableHeaderModal)
-                .then(res => {
-                    $('#table-list-head').html(`<tr>${res}</tr>`);
-                    handleDataHtml.LlenaTablaModal(response.Elemento);
-
-                    //setTimeout(function () {
-                    //    $('#modalTrs').modal("show");
-                    //}, 250);
-                });
-
-        });
-
-     
-
-    }  
-
-
     return {
         ConsultaEstaciones: ConsultaEstaciones,
         ConsultaDetalleEstacion: ConsultaDetalleEstacion,
         CargaDetalleEstacion: CargaDetalleEstacion,
-        ConsultaDetalleVariable: ConsultaDetalleVariable,
-        ConsultaDetalleGrafico: ConsultaDetalleGrafico,
-        CargaDetalleGrafico: CargaDetalleGrafico,
-        CargaDetalleVariable: CargaDetalleVariable
+        ConsultaDetalleVariable: ConsultaDetalleVariable
     }
 
 }();
@@ -473,29 +361,19 @@ var handleDataHtml = function () {
 
             var planta = $(this).attr("data-planta");
             var variable = $(this).attr("data-id");
+            handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
 
-            VariableId = variable;
-            PlantaId = planta;
+                SetColumnsTable(tableHeaderModal)
+                    .then(res => {
+                        $('#table-list-head').html(`<tr>${res}</tr>`);
+                        LlenaTablaModal(response.Elemento);
 
-            handleEstaciones.CargaDetalleGrafico(planta, variable);
-            handleEstaciones.CargaDetalleVariable(planta, variable);
+                        //setTimeout(function () {
+                        //    $('#modalTrs').modal("show");
+                        //}, 250);
+                    });
 
-            
-
-            //handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
-
-            //    SetColumnsTable(tableHeaderModal)
-            //        .then(res => {
-            //            $('#table-list-head').html(`<tr>${res}</tr>`);
-            //            LlenaTablaModal(response.Elemento);
-
-            //            //setTimeout(function () {
-            //            //    $('#modalTrs').modal("show");
-            //            //}, 250);
-            //        });
-
-            //});
-            
+            });
 
         });
 
@@ -530,26 +408,19 @@ var handleDataHtml = function () {
 
             var planta = $(this).attr("data-planta");
             var variable = $(this).attr("data-id");
+            handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
 
-            VariableId = variable;
-            PlantaId = planta;
+                SetColumnsTable(tableHeaderModal)
+                    .then(res => {
+                        $('#table-list-head').html(`<tr>${res}</tr>`);
+                        LlenaTablaModal(response.Elemento);
 
-            handleEstaciones.CargaDetalleGrafico(planta, variable);
-            handleEstaciones.CargaDetalleVariable(planta, variable);
+                        //setTimeout(function () {
+                        //    $('#modalTrs').modal("show");
+                        //}, 250);
+                    });
 
-            //handleEstaciones.ConsultaDetalleVariable(planta, variable, function (response) {
-
-            //    SetColumnsTable(tableHeaderModal)
-            //        .then(res => {
-            //            $('#table-list-head').html(`<tr>${res}</tr>`);
-            //            LlenaTablaModal(response.Elemento);
-
-            //            //setTimeout(function () {
-            //            //    $('#modalTrs').modal("show");
-            //            //}, 250);
-            //        });
-
-            //});
+            });
 
         });
     }
@@ -574,8 +445,7 @@ var handleDataHtml = function () {
     return {
         LlenarData: LlenarData,
         LlenaDataMetereologia: LlenaDataMetereologia,
-        LlenaDataGases: LlenaDataGases,
-        LlenaTablaModal: LlenaTablaModal
+        LlenaDataGases: LlenaDataGases
     }
 
 }();

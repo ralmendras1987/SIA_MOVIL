@@ -76,7 +76,7 @@ $(function () {
                 var objRemember = localStorage.getItem(Global.ObjRemember);
                 localStorage.clear();
                 localStorage.setItem(Global.ObjRemember, objRemember);
-                location.href = location.href = `/${Global.UrlBack}/Login/Login`;
+                location.href = location.href = `/${Global.UrlBack}/`;
             });
 
     });
