@@ -19,8 +19,10 @@ namespace GenesysJWT
     {
         private static string Secret = "ERMN05OPLoDvbTTa/QkqLNMI7cPLguaRyHzyg7n5qNBVjQmtBhz4SzYh4NBVCXi3KJHlSXKP+oi2+bXr6CUYTR==";
         public static string Key = "U0lBX01PVklMX0FQSUtleQ==";
-  
+
         public static bool Testing = true;
+
+        public static string SecAlg = SecurityAlgorithms.HmacSha256Signature;
 
         public static ClaimsPrincipal GetPrincipal(string token)
         {
@@ -61,8 +63,7 @@ namespace GenesysJWT
                 Subject = new ClaimsIdentity(new[] {
                       new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER_DATA)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
-                SigningCredentials = new SigningCredentials(securityKey,
-                SecurityAlgorithms.HmacSha512Signature)
+                SigningCredentials = new SigningCredentials(securityKey, SecAlg)
             };
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -82,8 +83,7 @@ namespace GenesysJWT
                 Subject = new ClaimsIdentity(new[] {
                       new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(DATA.USER_DATA)), new Claim(ClaimTypes.Role, JsonConvert.SerializeObject(DATA.ROLES)) , new Claim(ClaimTypes.Expiration, expiracion.ToString())}),
                 Expires = expiracion,
-                SigningCredentials = new SigningCredentials(securityKey,
-                SecurityAlgorithms.HmacSha512Signature)
+                SigningCredentials = new SigningCredentials(securityKey, SecAlg)
             };
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -150,29 +150,37 @@ namespace GenesysJWT
         public static string GenerateTokenJwt(string username)
         {
             // appsetting for Token JWT
-           
+
             var secretKey = ConfigurationManager.AppSettings["PrivateKey"];
             var urlWeb = ConfigurationManager.AppSettings["URL_WEB"];
             var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];
 
             var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+            var signingCredentials = new SigningCredentials(securityKey, SecAlg);
 
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) });
+            try
+            {             // create token to the user
+                var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+                var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
+                    audience: urlWeb,
+                    issuer: urlWeb,
+                    subject: claimsIdentity,
+                    notBefore: DateTime.UtcNow,
+                    expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
+                    signingCredentials: signingCredentials);
 
-            // create token to the user
-            var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-            var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
-                audience: urlWeb,
-                issuer: urlWeb,
-                subject: claimsIdentity,
-                notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
-                signingCredentials: signingCredentials);
+                var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
+                return jwtTokenString;
+            }
+            catch (Exception e)
+            {
+                throw e;
 
-            var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
-            return jwtTokenString;
+            }
+
+
         }
     }
 }
