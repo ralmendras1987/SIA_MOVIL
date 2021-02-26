@@ -42,23 +42,6 @@ D:\1.- PROYECTOS GENESYS\18.- CMPC\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debu
 D:\1.- PROYECTOS GENESYS\18.- CMPC\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
 D:\1.- PROYECTOS GENESYS\18.- CMPC\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll
 D:\1.- PROYECTOS GENESYS\18.- CMPC\sia_movil\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.pdb
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll.config
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.pdb
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.JsonWebTokens.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Logging.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.JsonWebTokens.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Logging.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.xml
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CoreCompileInputs.cache
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.pdb
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll.config
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.pdb
@@ -77,4 +60,20 @@ C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.C
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll
 C:\GENESYS\Sitios\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.pdb
-D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csprojAssemblyReference.cache
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll.config
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\SIA_MOVIL_MODELO.pdb
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Logging.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.JsonWebTokens.xml
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Logging.xml
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Microsoft.IdentityModel.Tokens.xml
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\Newtonsoft.Json.xml
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\bin\Release\System.IdentityModel.Tokens.Jwt.xml
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CoreCompileInputs.cache
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.csproj.CopyComplete
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.dll
+D:\GITLAB\sia_movil_jorge\SIA_MOVIL\SIA_MOVIL_MODELO\obj\Debug\SIA_MOVIL_MODELO.pdb

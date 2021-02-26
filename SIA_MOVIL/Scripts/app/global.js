@@ -64,7 +64,7 @@ $(function () {
                 var decrypted = CryptoJS.AES.decrypt(sesion, Global.ClaveEncriptacion);
                 var obj = $.parseJSON(decrypted.toString(CryptoJS.enc.Utf8));
                 DataSesion = obj;
-                console.log(DataSesion);
+               // console.log(DataSesion);
                 $("#lbNombreUsuario").html(obj.NOMBRE);
             });
     }
@@ -399,7 +399,7 @@ function SetValidation() {
 
     $('.Number').keypress(function (event) {
         var keycode = event.which;
-        console.log(keycode);
+        //console.log(keycode);
         if (!(event.shiftKey == false && (keycode == 44 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
             event.preventDefault();
         }
@@ -407,7 +407,7 @@ function SetValidation() {
 
     $('.Alphanumeric').keypress(function (event) {
         var keycode = event.which;
-        console.log(keycode);
+        //console.log(keycode);
         if (!(event.shiftKey == false && (keycode == 44 || keycode == 8 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
 
             if ((keycode >= 97 && keycode <= 122) || (keycode >= 65 && keycode <= 90)) {
@@ -423,7 +423,7 @@ function SetValidation() {
 
     $('.AlphanumericW').keypress(function (event) {
         var keycode = event.which;
-        console.log(keycode);
+        //console.log(keycode);
         if (!(event.shiftKey == false && (keycode == 44 || keycode == 8 || keycode == 32 || keycode == 37 || keycode == 39 || (keycode >= 48 && keycode <= 57)))) {
 
             if ((keycode >= 97 && keycode <= 122) || (keycode >= 65 && keycode <= 90)) {

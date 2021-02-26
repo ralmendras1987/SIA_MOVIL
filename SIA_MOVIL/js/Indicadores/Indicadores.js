@@ -237,7 +237,7 @@ function ObtieneDetalle(FILIAL, PLANTA, TIPO_FECHA, TIPO_INDICADOR, TITULO) {
         VV_USUARIO: DataSesion.USER
     };
 
-    console.log(DETALLE);
+    //console.log(DETALLE);
 
     GetDetalle_Service(DETALLE, function (res) {
 

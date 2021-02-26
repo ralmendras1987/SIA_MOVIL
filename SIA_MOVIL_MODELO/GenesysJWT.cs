@@ -23,6 +23,7 @@ namespace GenesysJWT
         public static bool Testing = true;
 
         public static string SecAlg = SecurityAlgorithms.HmacSha256Signature;
+        //public static string SecAlg2 = SecurityAlgorithms.RsaSha512Signature;
 
         public static ClaimsPrincipal GetPrincipal(string token)
         {
@@ -157,7 +158,7 @@ namespace GenesysJWT
 
             var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecAlg);
-
+            //var signingCredentials = new RSA(securityKey, SecAlg);
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) });
             try
