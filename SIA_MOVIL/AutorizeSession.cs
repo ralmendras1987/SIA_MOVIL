@@ -1,10 +1,6 @@
 ﻿using System.Web.Mvc;
-using System.Security.Claims;
-using System;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Configuration;
 using SIA_MOVIL.Models;
+using SIA_MOVIL_MODELO;
 using SIA_MOVIL_MODELO.DTO;
 
 namespace SIA_MOVIL
@@ -27,8 +23,8 @@ namespace SIA_MOVIL
                     filterContext.Result = new JsonResult() { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new HttpUnauthorizedResult("Not authorized") };
             else
             {
-                var JwtToken = ValidateJwtToken(objSesion.TokenJWT);
-                if (JwtToken == null)
+                var validToken = Metodos.ValidaToken(objSesion.TokenJWT);
+                if (validToken.Resultado == false)
                 {
                     if (controlador != "Login")
                     {
@@ -36,48 +32,18 @@ namespace SIA_MOVIL
                         filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.ApplicationPath);
                     }
                 }
-            }
-        }
-
-        private JwtSecurityToken ValidateJwtToken(string tokenString)
-        {
-            try
-            {
-                var secretKey = ConfigurationManager.AppSettings["PrivateKey"];
-                var urlWeb = ConfigurationManager.AppSettings["URL_WEB"];
-                var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
-
-                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                TokenValidationParameters validation = new TokenValidationParameters()
+                else
                 {
-                    ValidAudience = urlWeb,
-                    ValidIssuer = urlWeb,
-                    ValidateIssuer = true,
-                    ValidateLifetime = true,
-                    LifetimeValidator = CustomLifetimeValidator,
-                    RequireExpirationTime = true,
-                    IssuerSigningKey = securityKey,
-                    ValidateIssuerSigningKey = true,
-                };
-
-                SecurityToken token;
-                ClaimsPrincipal principal = handler.ValidateToken(tokenString, validation, out token);
-
-                return (JwtSecurityToken)token;
+                    if (!(bool)validToken.Elemento)
+                    {
+                        if (controlador != "Login")
+                        {
+                            MSession.FreeSession();
+                            filterContext.Result = new RedirectResult(filterContext.HttpContext.Request.ApplicationPath);
+                        }
+                    }
+                }
             }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        private bool CustomLifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken tokenToValidate, TokenValidationParameters @param)
-        {
-            if (expires != null)
-            {
-                return expires > DateTime.UtcNow;
-            }
-            return false;
         }
     }
 }

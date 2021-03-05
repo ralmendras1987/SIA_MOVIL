@@ -40,25 +40,25 @@ namespace SIA_MOVIL.Providers
 
             try
             {
-                var secretKey = ConfigurationManager.AppSettings["PrivateKey"];
-                var urlWeb = ConfigurationManager.AppSettings["URL_WEB"];
+                //var secretKey = ConfigurationManager.AppSettings["PrivateKey"];
+                //var urlWeb = ConfigurationManager.AppSettings["URL_WEB"];
 
-                var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
+                //var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
 
-                SecurityToken securityToken;
-                var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-                TokenValidationParameters validationParameters = new TokenValidationParameters()
-                {
-                    ValidAudience = urlWeb,
-                    ValidIssuer = urlWeb,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    LifetimeValidator = this.LifetimeValidator,
-                    IssuerSigningKey = securityKey
-                };
-                // Extract and assign Current Principal and user
-                Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
-                HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                //SecurityToken securityToken;
+                //var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+                //TokenValidationParameters validationParameters = new TokenValidationParameters()
+                //{
+                //    ValidAudience = urlWeb,
+                //    ValidIssuer = urlWeb,
+                //    ValidateLifetime = true,
+                //    ValidateIssuerSigningKey = true,
+                //    LifetimeValidator = this.LifetimeValidator,
+                //    IssuerSigningKey = securityKey
+                //};
+                //// Extract and assign Current Principal and user
+                //Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                //HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
 
                 return base.SendAsync(request, cancellationToken);
             }
@@ -74,13 +74,13 @@ namespace SIA_MOVIL.Providers
             return Task<HttpResponseMessage>.Factory.StartNew(() => new HttpResponseMessage(statusCode) { });
         }
 
-        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
-        {
-            if (expires != null)
-            {
-                if (DateTime.UtcNow < expires) return true;
-            }
-            return false;
-        }
+        //public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+        //{
+        //    if (expires != null)
+        //    {
+        //        if (DateTime.UtcNow < expires) return true;
+        //    }
+        //    return false;
+        //}
     }
 }

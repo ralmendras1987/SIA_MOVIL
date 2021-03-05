@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
+using System.IO;
 
 namespace SIA_MOVIL_MODELO
 {
@@ -72,8 +73,9 @@ namespace SIA_MOVIL_MODELO
                         DATA.USER_DATA.CORREO = ITEM["USUA_EMAIL"].ToString();
                         DATA.USER_DATA.TELEFONO = ITEM["USUA_TELEFONO"].ToString();
                     }
-                    //DATA.TOKEN = GenesysJWT.JWT.GeneraToken(DATA);
-                    DATA.TOKEN = GenesysJWT.JWT.GenerateTokenJwt(DATA.USER_DATA.NOMBRE);
+
+                    //DATA.TOKEN = GenesysJWT.JWT.GenerateTokenJwt(DATA.USER_DATA.NOMBRE);
+                    DATA.TOKEN = JwtRSA.GenerateToken(DATA.USER_DATA.NOMBRE, DATA.USER_DATA.USER);
                 }
                 else
                 {
@@ -88,66 +90,6 @@ namespace SIA_MOVIL_MODELO
             }
             DATA.USER_DATA.PASS = string.Empty;
         }
-
-        //public static void GeneraMenu(Menu MENU)
-        //{
-        //    try
-        //    {
-
-        //        DataTable DT = new DataTable();
-
-        //        OracleConnection CON = new OracleConnection(Comun._STR_CON());
-        //        OracleCommand CMD = new OracleCommand();
-        //        CMD.Connection = CON;
-        //        CMD.CommandText = Comun._PACKAGE() + "SP_MENU";
-        //        CMD.CommandType = CommandType.StoredProcedure;
-
-        //        CMD.Parameters.Add("PC_USUARIO", OracleType.VarChar, 50).Value = MENU.USER.USER;
-
-
-        //        CMD.Parameters.Add("P_CURSOR", OracleType.Cursor).Direction = ParameterDirection.Output;
-
-        //        OracleDataAdapter DA = new OracleDataAdapter(CMD);
-
-
-
-        //        DA.Fill(DT);
-
-        //        if (DT.Rows.Count > 0)
-        //        {
-        //            foreach (DataRow ITEM in DT.Rows)
-        //            {
-
-        //                MenuBody ROW = new MenuBody();
-
-        //                ROW.ID = ITEM["ID"].ToString();
-        //                ROW.DSC = ITEM["DSC"].ToString();
-        //                ROW.PADREID = ITEM["PADREID"].ToString();
-        //                ROW.ICONO = ITEM["ICONO"].ToString();
-        //                ROW.URL = ITEM["URL"].ToString();
-        //                ROW.NIVEL = ITEM["NIVEL"].ToString();
-
-
-        //                MENU.MENU.Add(ROW);
-
-        //            }
-
-        //        }
-
-
-
-        //    }
-        //    catch (Exception EX)
-        //    {
-
-        //        MENU.ERROR_ID = 1;
-        //        MENU.ERROR_DSC = "Error al generar menu";
-        //        MENU.ERROR_EX = "BaseLogin GeneraMenu: " + EX.Message;
-
-        //    }
-
-
-        //}
 
         public static bool ValidaCaptcha(string token)
         {
@@ -380,6 +322,22 @@ namespace SIA_MOVIL_MODELO
 
             return respuesta;
         }
-    }
 
+        public static DTORespuesta ValidaToken(string data)
+        {
+            DTORespuesta respuesta = new DTORespuesta();
+            try
+            {
+                respuesta.Elemento = JwtRSA.ValidateToken(data);
+            }
+            catch (Exception ex)
+            {
+                respuesta.IsError = true;
+                respuesta.Resultado = false;
+                respuesta.Mensaje = ex.Message;
+            }
+
+            return respuesta;
+        }
+    }
 }

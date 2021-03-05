@@ -28,7 +28,7 @@ namespace SIA_MOVIL
             //    foreach (string s in Response.Cookies.AllKeys)
             //    {
             //        if (s == FormsAuthentication.FormsCookieName || s.ToLower() == "asp.net_sessionid")
-            //         {
+            //        {
             //            Response.Cookies[s].Secure = true;
             //        }
             //    }

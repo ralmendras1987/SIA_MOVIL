@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIA_MOVIL_MODELO", "SIA_MOV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIA_MOVIL_WEBAPI", "SIA_MOVIL_WEBAPI\SIA_MOVIL_WEBAPI.csproj", "{594BAEDF-8B6E-4A94-B45B-55F81C13C4E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSAJWT", "RSA_JWT\RSAJWT.csproj", "{1FDA1F17-AA94-4114-B96D-335750684B95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{594BAEDF-8B6E-4A94-B45B-55F81C13C4E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{594BAEDF-8B6E-4A94-B45B-55F81C13C4E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{594BAEDF-8B6E-4A94-B45B-55F81C13C4E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FDA1F17-AA94-4114-B96D-335750684B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FDA1F17-AA94-4114-B96D-335750684B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FDA1F17-AA94-4114-B96D-335750684B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FDA1F17-AA94-4114-B96D-335750684B95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

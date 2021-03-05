@@ -1,13 +1,11 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
+using SIA_MOVIL_MODELO;
 
 namespace SIA_MOVIL_WEBAPI.Providers
 {
@@ -40,47 +38,28 @@ namespace SIA_MOVIL_WEBAPI.Providers
 
             try
             {
-                var secretKey = ConfigurationManager.AppSettings["PrivateKey"];
-                var urlWeb = ConfigurationManager.AppSettings["URL_WEB"];
-
-                var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
-
-                SecurityToken securityToken;
-                var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-                TokenValidationParameters validationParameters = new TokenValidationParameters()
+                var authToken = request.Headers.Authorization;
+                var validToken = Metodos.ValidaToken(authToken.Parameter);
+                if (validToken.Resultado == false)
                 {
-                    ValidAudience = urlWeb,
-                    ValidIssuer = urlWeb,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    LifetimeValidator = this.LifetimeValidator,
-                    IssuerSigningKey = securityKey
-                };
-                // Extract and assign Current Principal and user
-                Thread.CurrentPrincipal = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
-                HttpContext.Current.User = tokenHandler.ValidateToken(token, validationParameters, out securityToken);
+                    statusCode = HttpStatusCode.Unauthorized;
+                }
+                else
+                {
+                    if (!(bool)validToken.Elemento)
+                    {
+                        statusCode = HttpStatusCode.Unauthorized;
+                    }
+                }
 
                 return base.SendAsync(request, cancellationToken);
             }
-            catch (SecurityTokenValidationException ex)
+            catch (Exception ex)
             {
                 statusCode = HttpStatusCode.Unauthorized;
             }
-            catch (Exception ex)
-            {
-                statusCode = HttpStatusCode.InternalServerError;
-            }
 
             return Task<HttpResponseMessage>.Factory.StartNew(() => new HttpResponseMessage(statusCode) { });
-        }
-
-        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
-        {
-            if (expires != null)
-            {
-                if (DateTime.UtcNow < expires) return true;
-            }
-            return false;
         }
     }
 }
